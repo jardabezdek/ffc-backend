@@ -2,5 +2,6 @@ matplotlib
 notebook
 numpy
 pandas
+requests
 scikit-learn
 seaborn
