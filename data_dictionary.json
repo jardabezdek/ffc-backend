@@ -1,0 +1,1013 @@
+{
+    "players": [
+        {
+            "column": "player_id",
+            "column_moneypuck": "playerId",
+            "description": "Unique ID for each player, assigned by the NHL."
+        },
+        {
+            "column": "season",
+            "column_moneypuck": "season",
+            "description": "Starting year of the season, e. g. 2018 corresponds to the 2018-2019 season."
+        },
+        {
+            "column": "name",
+            "column_moneypuck": "name",
+            "description": "Player's name."
+        },
+        {
+            "column": "team",
+            "column_moneypuck": "team",
+            "description": "Player's team."
+        },
+        {
+            "column": "position",
+            "column_moneypuck": "position",
+            "description": "G = goalie; D = defensman; R = right wing; C = center; L = left wing."
+        },
+        {
+            "column": "situation",
+            "column_moneypuck": "situation",
+            "description": "5on5 = normal play; 5on4 = normal powerplay; 4on5 = normal penalty kill; Other = everything else, e. g. two man advantage, empty net, 4on3, etc; all = all situations."
+        },
+        {
+            "column": "games_played",
+            "column_moneypuck": "games_played",
+            "description": "Number of games played."
+        },
+        {
+            "column": "time_on_ice",
+            "column_moneypuck": "icetime",
+            "description": "Icetime in seconds."
+        },
+        {
+            "column": "shifts",
+            "column_moneypuck": "shifts",
+            "description": "Number of shifts a player had."
+        },
+        {
+            "column": "on_ice_corsi_perc",
+            "column_moneypuck": "onIce_corsiPercentage",
+            "description": "On Ice Shot Attempts For / (On Ice Shot Attempts For + On Ice Shot Attempts Against)"
+        },
+        {
+            "column": "off_ice_corsi_perc",
+            "column_moneypuck": "offIce_corsiPercentage",
+            "description": "Off Ice Shot Attempts For / (Off Ice Shot Attempts For + Off Ice Shot Attempts Against)"
+        },
+        {
+            "column": "on_ice_fenwick_perc",
+            "column_moneypuck": "onIce_fenwickPercentage",
+            "description": "On Ice Unblocked Shot Attempts For / (On Ice Unlbocked Shot Attempts For + On Ice Unbloked Shot Attempts Against)"
+        },
+        {
+            "column": "off_ice_fenwick_perc",
+            "column_moneypuck": "offIce_fenwickPercentage",
+            "description": "Off Ice Unblocked Shot Attempts For / (Off Ice Unlbocked Shot Attempts For + Off Ice Unbloked Shot Attempts Against)"
+        },
+        {
+            "column": "time_on_ice_rank",
+            "column_moneypuck": "iceTimeRank",
+            "description": "Rank of the player's icetime in a given game. Forwards and Defensemen are ranked seperately. 1 means the player got more icetime in the game than any other F/D."
+        },
+        {
+            "column": "assists_primary",
+            "column_moneypuck": "I_F_primaryAssists",
+            "description": "Primary Assists the player has received on teammates' goals."
+        },
+        {
+            "column": "assists_secondary",
+            "column_moneypuck": "I_F_secondaryAssists",
+            "description": "Secondary Assists the player has received on teammates' goals."
+        },
+        {
+            "column": "shots_on_goal",
+            "column_moneypuck": "I_F_shotsOnGoal",
+            "description": "Shots on goal. Does not include shots that miss the net or blocked shots."
+        },
+        {
+            "column": "shots_missed",
+            "column_moneypuck": "I_F_missedShots",
+            "description": "Missed shots. Shots that aren't blocked but don't hit the net."
+        },
+        {
+            "column": "shots_blocked",
+            "column_moneypuck": "I_F_blockedShotAttempts",
+            "description": "Blocked shot attempts. The number of shot attempts a player has taken that were blocked by the opponent's team."
+        },
+        {
+            "column": "shots",
+            "column_moneypuck": "I_F_shotAttempts",
+            "description": "Shot attempts. Includes shots on goal, missed shots, and blocked shot attempts."
+        },
+        {
+            "column": "points",
+            "column_moneypuck": "I_F_points",
+            "description": "Goals + Assists"
+        },
+        {
+            "column": "goals",
+            "column_moneypuck": "I_F_goals",
+            "description": "Goals."
+        },
+        {
+            "column": "rebounds",
+            "column_moneypuck": "I_F_rebounds",
+            "description": "Rebound shot attempts. These must occur within 3 seconds of a previous shot."
+        },
+        {
+            "column": "goals_from_rebound",
+            "column_moneypuck": "I_F_reboundGoals",
+            "description": "Goals from rebound shot attempts."
+        },
+        {
+            "column": "puck_freezes",
+            "column_moneypuck": "I_F_freeze",
+            "description": "Puck freezes after a player's shots. The  number of puck freezes by  goalies after the player's unblocked shot attempts."
+        },
+        {
+            "column": "play_stopped",
+            "column_moneypuck": "I_F_playStopped",
+            "description": "Number of times the play is stopped after shots for reasons other than the goalie freezing the puck, such as the puck going over the glass or a dislodged net."
+        },
+        {
+            "column": "play_continued_in_zone",
+            "column_moneypuck": "I_F_playContinuedInZone",
+            "description": "Number of times the play continues in the offensive zone after the player's shot besides an immediate rebound shot. This is proxied by another event happening in the zone after the shot (such as a hit, takeaway, etc) without any events outside of the zone happening inbetween and all the same players for both teams are still on the ice as they were for the original shot."
+        },
+        {
+            "column": "play_continued_out_zone",
+            "column_moneypuck": "I_F_playContinuedOutsideZone",
+            "description": "Number of times the play goes outside the offensive zone after the player's shot."
+        },
+        {
+            "column": "shots_saved",
+            "column_moneypuck": "I_F_savedShotsOnGoal",
+            "description": "Number of the player's unblocked shots that were saved by the goalie."
+        },
+        {
+            "column": "shots_saved_and_missed",
+            "column_moneypuck": "I_F_savedUnblockedShotAttempts",
+            "description": "Number of the player's unblocked shots that were saved by the goalie or missed the net."
+        },
+        {
+            "column": "penalties",
+            "column_moneypuck": "penalties",
+            "description": "Number of penalties the player has received. Both majors and minors both count as 1."
+        },
+        {
+            "column": "hits",
+            "column_moneypuck": "I_F_hits",
+            "description": "Number of hits the player has given."
+        },
+        {
+            "column": "takeaways",
+            "column_moneypuck": "I_F_takeaways",
+            "description": "Number of takeaways the player has taken from opponents."
+        },
+        {
+            "column": "giveaways",
+            "column_moneypuck": "I_F_giveaways",
+            "description": "Number of giveaways the player has given to other team."
+        },
+        {
+            "column": "shots_unblocked",
+            "column_moneypuck": "I_F_unblockedShotAttempts",
+            "description": "All shot attempts that weren't blocked."
+        },
+        {
+            "column": "giveaways_dzone",
+            "column_moneypuck": "I_F_dZoneGiveaways",
+            "description": "Giveaways in the team's defensive zone."
+        },
+        {
+            "column": "shifts_start_in_ozone",
+            "column_moneypuck": "I_F_oZoneShiftStarts",
+            "description": "Number of offensive zone face-off shift starts a player had."
+        },
+        {
+            "column": "shifts_start_in_dzone",
+            "column_moneypuck": "I_F_dZoneShiftStarts",
+            "description": "Number of defensive zone face-off shift starts a player had."
+        },
+        {
+            "column": "shifts_start_in_nzone",
+            "column_moneypuck": "I_F_neutralZoneShiftStarts",
+            "description": "Number of neutral zone face-off shift starts a player had."
+        },
+        {
+            "column": "shifts_start_on_fly",
+            "column_moneypuck": "I_F_flyShiftStarts",
+            "description": "Number of shift starts on the fly a player had."
+        },
+        {
+            "column": "shifts_end_in_ozone",
+            "column_moneypuck": "I_F_oZoneShiftEnds",
+            "description": "Number of player's shifts that end with an offensive zone faceoff for the oncoming players."
+        },
+        {
+            "column": "shifts_end_in_dzone",
+            "column_moneypuck": "I_F_dZoneShiftEnds",
+            "description": "Number of player's shifts that end with a defensive zone faceoff for the oncoming players."
+        },
+        {
+            "column": "shifts_end_in_nzone",
+            "column_moneypuck": "I_F_neutralZoneShiftEnds",
+            "description": "Number of player's shifts that end with a neutral zone faceoff for the oncoming players."
+        },
+        {
+            "column": "shifts_end_on_fly",
+            "column_moneypuck": "I_F_flyShiftEnds",
+            "description": "Number of player's shifts that end on the fly."
+        },
+        {
+            "column": "faceoffs_won",
+            "column_moneypuck": "faceoffsWon",
+            "description": "Number of faceoffs the player has won."
+        },
+        {
+            "column": "faceoffs_lost",
+            "column_moneypuck": "faceoffsLost",
+            "description": "Number of faceoffs the player has lost"
+        },
+        {
+            "column": "time_on_bench",
+            "column_moneypuck": "timeOnBench",
+            "description": "Amount of time the player has been on the bench for. (in seconds)"
+        },
+        {
+            "column": "penalties_mins",
+            "column_moneypuck": "penalityMinutes",
+            "description": "Number of penalty minutes the player has received."
+        },
+        {
+            "column": "penalties_drawn_mins",
+            "column_moneypuck": "penalityMinutesDrawn",
+            "description": "Number of penalty minutes the player has drawn."
+        },
+        {
+            "column": "penalties_drawn",
+            "column_moneypuck": "penaltiesDrawn",
+            "description": "Number of penalties the player has drawn."
+        },
+        {
+            "column": "shots_blocked_by_player",
+            "column_moneypuck": "shotsBlockedByPlayer",
+            "description": "Number of shot attempts blocked by the player."
+        },
+        {
+            "column": "on_ice_for_shots_on_goal",
+            "column_moneypuck": "OnIce_F_shotsOnGoal",
+            "description": "Player team's shots on goal while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_shots_missed",
+            "column_moneypuck": "OnIce_F_missedShots",
+            "description": "Player team's missed shots while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_shots_blocked",
+            "column_moneypuck": "OnIce_F_blockedShotAttempts",
+            "description": "Player team's blocked shots while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_shots",
+            "column_moneypuck": "OnIce_F_shotAttempts",
+            "description": "Player team's shot attempts while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_goals",
+            "column_moneypuck": "OnIce_F_goals",
+            "description": "Player team's goals while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_rebounds",
+            "column_moneypuck": "OnIce_F_rebounds",
+            "description": "Player team's rebounds while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_goals_from_rebound",
+            "column_moneypuck": "OnIce_F_reboundGoals",
+            "description": "Player team's goals from rebound while a player is on ice."
+        },
+        {
+            "column": "on_ice_for_shots_unblocked",
+            "column_moneypuck": "OnIce_F_unblockedShotAttempts",
+            "description": "Player team's ublocked shot attempts while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_shots_on_goal",
+            "column_moneypuck": "OnIce_A_shotsOnGoal",
+            "description": "Opponent team's shots on goal while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_shots_missed",
+            "column_moneypuck": "OnIce_A_missedShots",
+            "description": "Opponent team's missed shots while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_shots_blocked",
+            "column_moneypuck": "OnIce_A_blockedShotAttempts",
+            "description": "Opponent team's blocked shots while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_shots",
+            "column_moneypuck": "OnIce_A_shotAttempts",
+            "description": "Opponent team's shot attempts while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_goals",
+            "column_moneypuck": "OnIce_A_goals",
+            "description": "Opponent team's goals while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_rebounds",
+            "column_moneypuck": "OnIce_A_rebounds",
+            "description": "Opponent team's rebounds while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_goals_from_rebound",
+            "column_moneypuck": "OnIce_A_reboundGoals",
+            "description": "Opponent team's goals from rebound while a player is on ice."
+        },
+        {
+            "column": "on_ice_aga_shots_unblocked",
+            "column_moneypuck": "OnIce_A_unblockedShotAttempts",
+            "description": "Opponent team's ublocked shot attempts while a player is on ice."
+        },
+        {
+            "column": "off_ice_for_shots",
+            "column_moneypuck": "OffIce_F_shotAttempts",
+            "description": "Player team's shot attempts while a player is not on ice."
+        },
+        {
+            "column": "off_ice_aga_shots",
+            "column_moneypuck": "OffIce_A_shotAttempts",
+            "description": "Opponent team's shot attempts while a player is not on ice."
+        },
+        {
+            "column": "corsi_for_after_shifts",
+            "column_moneypuck": "corsiForAfterShifts",
+            "description": "Shot attempts the player's team gets between 1 and 5 seconds after the player has shifted off on the fly. Meant to give credit to players who leave the ice when the puck is going towards the opposing team's zone."
+        },
+        {
+            "column": "corsi_aga_after_shifts",
+            "column_moneypuck": "corsiAgainstAfterShifts",
+            "description": "Shot attempts the opposing team gets between 1 and 5 seconds after the player has shifted off on the fly. Meant to identify players who shift off instead of backchecking."
+        },
+        {
+            "column": "fenwick_for_after_shifts",
+            "column_moneypuck": "fenwickForAfterShifts",
+            "description": "Unblocked Shot attempts the player's team gets between 1 and 5 seconds after the player has shifted off on the fly. Meant to give credit to players who leave the ice when the puck is going towards the opposing team's zone."
+        },
+        {
+            "column": "fenwick_aga_after_shifts",
+            "column_moneypuck": "fenwickAgainstAfterShifts",
+            "description": "Unblocked Shot attempts the opposing team gets between 1 and 5 seconds after the player has shifted off on the fly. Meant to identify players who shift off instead of backchecking."
+        }
+    ],
+    "shots": [
+        {
+            "column": "shot_id",
+            "column_moneypuck": "shotID",
+            "description": "Unique shot id."
+        },
+        {
+            "column": "game_id",
+            "column_moneypuck": "game_id",
+            "description": "The NHL Game_id of the game the shot took place in."
+        },
+        {
+            "column": "home_team",
+            "column_moneypuck": "homeTeamCode",
+            "description": "The home team in the game, e. g. TOR, MTL, NYR, etc."
+        },
+        {
+            "column": "away_team",
+            "column_moneypuck": "awayTeamCode",
+            "description": "The away team in the game."
+        },
+        {
+            "column": "season",
+            "column_moneypuck": "season",
+            "description": "Season the shot took place in, e. g. 2009 for the 2009-2010 season."
+        },
+        {
+            "column": "is_playoff_game",
+            "column_moneypuck": "isPlayoffGame",
+            "description": "Set to 1 if a playoff game, otherwise 0."
+        },
+        {
+            "column": "home_team_won",
+            "column_moneypuck": "homeTeamWon",
+            "description": "Set to 1 if the home team won the game. Otherwise 0."
+        },
+        {
+            "column": "game_order_id",
+            "column_moneypuck": "id",
+            "description": "The shot index within the game, e. g. the first shot of the game is equal to 1."
+        },
+        {
+            "column": "time",
+            "column_moneypuck": "time",
+            "description": "Seconds into the game of the shot."
+        },
+        {
+            "column": "time_until_next",
+            "column_moneypuck": "timeUntilNextEvent",
+            "description": "Time between the shot and the next event that happens in the game after the shot."
+        },
+        {
+            "column": "time_since_last",
+            "column_moneypuck": "timeSinceLastEvent",
+            "description": "Time between the shot and the event that took place before the shot."
+        },
+        {
+            "column": "period",
+            "column_moneypuck": "period",
+            "description": "Period of the game."
+        },
+        {
+            "column": "team",
+            "column_moneypuck": "team",
+            "description": "The team taking the shot. HOME or AWAY."
+        },
+        {
+            "column": "zone",
+            "column_moneypuck": "location",
+            "description": "The zone the shot took place in. HOMEZONE, AWAYZONE, or Neu. Zone"
+        },
+        {
+            "column": "event",
+            "column_moneypuck": "event",
+            "description": "Whether the shot was a shot on goal (SHOT), goal (GOAL), or missed the net (MISS)."
+        },
+        {
+            "column": "is_goal",
+            "column_moneypuck": "goal",
+            "description": "Set to 1 if shot was a goal. Otherwise 0."
+        },
+        {
+            "column": "is_play_continued_out",
+            "column_moneypuck": "shotPlayContinuedOutsideZone",
+            "description": "Set to 1 if play continued after the shot. (not a goal, goalie stop, or out of play), but the next event was outside of the attacking zone. Otherwise 0."
+        },
+        {
+            "column": "is_play_continued_in",
+            "column_moneypuck": "shotPlayContinuedInZone",
+            "description": "Set to 1 if play continued after the shot. (not a goal, goalie stop, or out of play) and the next event was inside the attacking zone. Otherwise 0."
+        },
+        {
+            "column": "is_froze",
+            "column_moneypuck": "shotGoalieFroze",
+            "description": "Set to 1 if the goalie froze the puck within 1 second of the shot. Otherwise 0."
+        },
+        {
+            "column": "is_play_stopped",
+            "column_moneypuck": "shotPlayStopped",
+            "description": "Set to 1 if the play stopped after the shot for a reason beyond a goalie freeze. (Puck went outside the playing surface, dislodged net, etc). Otherwise 0."
+        },
+        {
+            "column": "is_rebound_generated",
+            "column_moneypuck": "shotGeneratedRebound",
+            "description": "Set to 1 if the shot generated a rebound shot within 3 seconds of the this shot."
+        },
+        {
+            "column": "goals_home",
+            "column_moneypuck": "homeTeamGoals",
+            "description": "Home team goals before the shot took place."
+        },
+        {
+            "column": "goals_away",
+            "column_moneypuck": "awayTeamGoals",
+            "description": "Away team goals before the shot took palce"
+        },
+        {
+            "column": "x_cord",
+            "column_moneypuck": "xCord",
+            "description": "The X coordinate 'North South' on the ice of the shot. Feet from red line.  -89 and 89 are the goal lines at each of the rink."
+        },
+        {
+            "column": "y_cord",
+            "column_moneypuck": "yCord",
+            "description": "The Y coordinate 'East West' on the ice of the shot. The middle of the ice has a y-coordinate of 0."
+        },
+        {
+            "column": "x_cord_abs",
+            "column_moneypuck": "xCordAdjusted",
+            "description": "Absolute value of x coordinate = as if all shots were at the right end of the rink. Usually makes the coordinate a positive number."
+        },
+        {
+            "column": "y_cord_abs",
+            "column_moneypuck": "yCordAdjusted",
+            "description": "Absolute value of y coordinate = as if all shots were at the right end of the rink."
+        },
+        {
+            "column": "angle",
+            "column_moneypuck": "shotAngle",
+            "description": "The angle of the shot in degrees. Is a positive number if the shot is from the left side of the ice."
+        },
+        {
+            "column": "angle_abs",
+            "column_moneypuck": "shotAngleAdjusted",
+            "description": "The absolute value of the shot angle."
+        },
+        {
+            "column": "angle_plus_rebound",
+            "column_moneypuck": "shotAnglePlusRebound",
+            "description": "The difference in angle between the previous shot and this shot if this shot is a rebound. Otherwise set to 0."
+        },
+        {
+            "column": "is_royal_road_rebound",
+            "column_moneypuck": "shotAngleReboundRoyalRoad",
+            "description": "Set to 1 if the puck went through the middle of the between this shot and previous shot if this shot is a rebound."
+        },
+        {
+            "column": "distance",
+            "column_moneypuck": "shotDistance",
+            "description": "The distance from the net of the shot in feet. Net is defined as being at the (89,0) coordinates."
+        },
+        {
+            "column": "type",
+            "column_moneypuck": "shotType",
+            "description": "Type of the shot. (Slap, Wrist, etc)"
+        },
+        {
+            "column": "is_empty_net",
+            "column_moneypuck": "shotOnEmptyNet",
+            "description": "Set to 1 if the shot was on an empty net. Otherwise 0."
+        },
+        {
+            "column": "is_rebound",
+            "column_moneypuck": "shotRebound",
+            "description": "Set to 1 if the shot is a rebound. (If the last event was a shot and within 3 seconds of this shot)."
+        },
+        {
+            "column": "angle_plus_rebound_speed",
+            "column_moneypuck": "shotAnglePlusReboundSpeed",
+            "description": "The shotAnglePlusRebound variable divided by time between the last shot and this one. (How fast the angle changed)"
+        },
+        {
+            "column": "is_on_rush",
+            "column_moneypuck": "shotRush",
+            "description": "Set to 1 if the shot was on a rush. (If the last event was in another zone and within 4 seconds)."
+        },
+        {
+            "column": "last_event_from_speed",
+            "column_moneypuck": "speedFromLastEvent",
+            "description": "The distance between the shot location and the previous event's location divded by the number of seconds between them."
+        },
+        {
+            "column": "last_event_x_cord",
+            "column_moneypuck": "lastEventxCord",
+            "description": "The x coorinate of the last event before the shot."
+        },
+        {
+            "column": "last_event_y_cord",
+            "column_moneypuck": "lastEventyCord",
+            "description": "The y coorinate of the last event before the shot."
+        },
+        {
+            "column": "last_event_from_distance",
+            "column_moneypuck": "distanceFromLastEvent",
+            "description": "The distance between the shot location and the previous event's location in feet."
+        },
+        {
+            "column": "last_event_angle",
+            "column_moneypuck": "lastEventShotAngle",
+            "description": "The shot angle of the shot directly before this shot if the last event was a shot."
+        },
+        {
+            "column": "last_event_distance",
+            "column_moneypuck": "lastEventShotDistance",
+            "description": "The shot distance of the shot directly before this shot. (If the last event was a shot)"
+        },
+        {
+            "column": "last_event",
+            "column_moneypuck": "lastEventCategory",
+            "description": "The type of event before the shot. Shot, hit, etc."
+        },
+        {
+            "column": "last_event_team",
+            "column_moneypuck": "lastEventTeam",
+            "description": "The team that did the last event. HOME or AWAY. If last event was a faceoff is the team that won the faceoff."
+        },
+        {
+            "column": "is_empty_net_home",
+            "column_moneypuck": "homeEmptyNet",
+            "description": "Whether the home team's net is empty at the time of the shot."
+        },
+        {
+            "column": "is_empty_net_away",
+            "column_moneypuck": "awayEmptyNet",
+            "description": "Whether the away teams net is empty at the time of the shot."
+        },
+        {
+            "column": "skaters_on_ice_home",
+            "column_moneypuck": "homeSkatersOnIce",
+            "description": "The number of skaters on the ice for the home team. Does not count the goalie."
+        },
+        {
+            "column": "skaters_on_ice_away",
+            "column_moneypuck": "awaySkatersOnIce",
+            "description": "The number of skaters on the ice for the away team. Does not count the goalie."
+        },
+        {
+            "column": "penalty_time_left_away",
+            "column_moneypuck": "awayPenalty1TimeLeft",
+            "description": "The number of seconds left in the penalty on the away team. If the penalty that will expire first if multiple penalities."
+        },
+        {
+            "column": "penalty_time_total_away",
+            "column_moneypuck": "awayPenalty1Length",
+            "description": "The total length in seconds of the penalty on the away team. Is the penalty that will expire first if multiple penalities on the away team."
+        },
+        {
+            "column": "penalty_time_left_home",
+            "column_moneypuck": "homePenalty1TimeLeft",
+            "description": "The number of seconds left in the penalty on the home team. If the penalty that will expire first if multiple penalities."
+        },
+        {
+            "column": "penalty_time_total_home",
+            "column_moneypuck": "homePenalty1Length",
+            "description": "The total length in seconds of the penalty on the home team. Is the penalty that will expire first if multiple penalities on the home team."
+        },
+        {
+            "column": "player_position",
+            "column_moneypuck": "playerPositionThatDidEvent",
+            "description": "The position of the player doing the shot. L = left wing; R = right wing; C = centre; D = defenceman."
+        },
+        {
+            "column": "player_number",
+            "column_moneypuck": "playerNumThatDidEvent",
+            "description": "The jersey number of the player that took the shot."
+        },
+        {
+            "column": "last_player_number",
+            "column_moneypuck": "playerNumThatDidLastEvent",
+            "description": "The jersey number of the player that did the last event before the shot. Only populated if the previous event is a shot attempt. Otherwise 0."
+        },
+        {
+            "column": "last_event_x_cord_abs",
+            "column_moneypuck": "lastEventxCord_adjusted",
+            "description": "Absolute value of last event's x coordinate."
+        },
+        {
+            "column": "last_event_y_cord_abs",
+            "column_moneypuck": "lastEventyCord_adjusted",
+            "description": "Absolute value of last event's y coordinate."
+        },
+        {
+            "column": "time_since_faceoff",
+            "column_moneypuck": "timeSinceFaceoff",
+            "description": "Seconds since there has been a faceoff at the time of the shot."
+        },
+        {
+            "column": "goalie_id",
+            "column_moneypuck": "goalieIdForShot",
+            "description": "The NHL player id for the goalie the shot is on."
+        },
+        {
+            "column": "goalie_name",
+            "column_moneypuck": "goalieNameForShot",
+            "description": "The first and last name of the goalie the shot is on."
+        },
+        {
+            "column": "player_id",
+            "column_moneypuck": "shooterPlayerId",
+            "description": "The NHL player id of the skater taking the shot"
+        },
+        {
+            "column": "player_name",
+            "column_moneypuck": "shooterName",
+            "description": "The First and Last name of the player taking the shot"
+        },
+        {
+            "column": "player_side",
+            "column_moneypuck": "shooterLeftRight",
+            "description": "Whether the shooter is a left or right shot."
+        },
+        {
+            "column": "player_time_on_ice",
+            "column_moneypuck": "shooterTimeOnIce",
+            "description": "Playing time in seconds that have passed since the shooter started their shift."
+        },
+        {
+            "column": "player_time_since_faceoff",
+            "column_moneypuck": "shooterTimeOnIceSinceFaceoff",
+            "description": "The minimum of the  playing time in seconds since the last faceoff and the playing time that has passed since the shooter started their shift."
+        },
+        {
+            "column": "shoot_team_forwards_on_ice",
+            "column_moneypuck": "shootingTeamForwardsOnIce",
+            "description": "Number of forwards the shooting team has on the ice."
+        },
+        {
+            "column": "shoot_team_defencemen_on_ice",
+            "column_moneypuck": "shootingTeamDefencemenOnIce",
+            "description": "Number of defencemen the shooting team has on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_avg",
+            "column_moneypuck": "shootingTeamAverageTimeOnIce",
+            "description": "The average playing time in seconds the shooting team's players have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_avg_forwards",
+            "column_moneypuck": "shootingTeamAverageTimeOnIceOfForwards",
+            "description": "The average playing time in seconds the shooting team's forwards have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_avg_defencemen",
+            "column_moneypuck": "shootingTeamAverageTimeOnIceOfDefencemen",
+            "description": "The average playing time in seconds the shooting team's defencemen have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_max",
+            "column_moneypuck": "shootingTeamMaxTimeOnIce",
+            "description": "The maximum playing time in seconds the shooting team's players have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_max_forwards",
+            "column_moneypuck": "shootingTeamMaxTimeOnIceOfForwards",
+            "description": "The maximum playing time in seconds the shooting team's forwards have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_max_defencemen",
+            "column_moneypuck": "shootingTeamMaxTimeOnIceOfDefencemen",
+            "description": "The maximum playing time in seconds the shooting team's defencemen have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_min",
+            "column_moneypuck": "shootingTeamMinTimeOnIce",
+            "description": "The minimum playing time in seconds the shooting team's players have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_min_forwards",
+            "column_moneypuck": "shootingTeamMinTimeOnIceOfForwards",
+            "description": "The minimum playing time in seconds the shooting team's forwards have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_min_defencemen",
+            "column_moneypuck": "shootingTeamMinTimeOnIceOfDefencemen",
+            "description": "The minimum playing time in seconds the shooting team's defencemen have been on the ice."
+        },
+        {
+            "column": "shoot_team_time_on_ice_avg_since_faceoff",
+            "column_moneypuck": "shootingTeamAverageTimeOnIceSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_avg_forwards_since_faceoff",
+            "column_moneypuck": "shootingTeamAverageTimeOnIceOfForwardsSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_avg_defencemen_since_faceoff",
+            "column_moneypuck": "shootingTeamAverageTimeOnIceOfDefencemenSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_max_since_faceoff",
+            "column_moneypuck": "shootingTeamMaxTimeOnIceSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_max_forwards_since_faceoff",
+            "column_moneypuck": "shootingTeamMaxTimeOnIceOfForwardsSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_max_defencemen_since_faceoff",
+            "column_moneypuck": "shootingTeamMaxTimeOnIceOfDefencemenSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_min_since_faceoff",
+            "column_moneypuck": "shootingTeamMinTimeOnIceSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_min_forwards_since_faceoff",
+            "column_moneypuck": "shootingTeamMinTimeOnIceOfForwardsSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "shoot_team_time_on_ice_min_defencemen_since_faceoff",
+            "column_moneypuck": "shootingTeamMinTimeOnIceOfDefencemenSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_forwards_on_ice",
+            "column_moneypuck": "defendingTeamForwardsOnIce",
+            "description": "Number of forwards the defending team has on the ice."
+        },
+        {
+            "column": "defend_team_defencemen_on_ice",
+            "column_moneypuck": "defendingTeamDefencemenOnIce",
+            "description": "Number of defencemen the defending team has on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_avg",
+            "column_moneypuck": "defendingTeamAverageTimeOnIce",
+            "description": "The average playing time in seconds the shooting team's players have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_avg_forwards",
+            "column_moneypuck": "defendingTeamAverageTimeOnIceOfForwards",
+            "description": "The average playing time in seconds the shooting team's forwards have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_avg_defencemen",
+            "column_moneypuck": "defendingTeamAverageTimeOnIceOfDefencemen",
+            "description": "The average playing time in seconds the shooting team's defencemen have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_max",
+            "column_moneypuck": "defendingTeamMaxTimeOnIce",
+            "description": "The maximum playing time in seconds the shooting team's players have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_max_forwards",
+            "column_moneypuck": "defendingTeamMaxTimeOnIceOfForwards",
+            "description": "The maximum playing time in seconds the shooting team's forwards have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_max_defencemen",
+            "column_moneypuck": "defendingTeamMaxTimeOnIceOfDefencemen",
+            "description": "The maximum playing time in seconds the shooting team's defencemen have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_min",
+            "column_moneypuck": "defendingTeamMinTimeOnIce",
+            "description": "The minimum playing time in seconds the shooting team's players have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_min_forwards",
+            "column_moneypuck": "defendingTeamMinTimeOnIceOfForwards",
+            "description": "The minimum playing time in seconds the shooting team's forwards have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_min_defencemen",
+            "column_moneypuck": "defendingTeamMinTimeOnIceOfDefencemen",
+            "description": "The minimum playing time in seconds the shooting team's defencemen have been on the ice."
+        },
+        {
+            "column": "defend_team_time_on_ice_avg_since_faceoff",
+            "column_moneypuck": "defendingTeamAverageTimeOnIceSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_avg_forwards_since_faceoff",
+            "column_moneypuck": "defendingTeamAverageTimeOnIceOfForwardsSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_avg_defencemen_since_faceoff",
+            "column_moneypuck": "defendingTeamAverageTimeOnIceOfDefencemenSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_max_since_faceoff",
+            "column_moneypuck": "defendingTeamMaxTimeOnIceSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_max_forwards_since_faceoff",
+            "column_moneypuck": "defendingTeamMaxTimeOnIceOfForwardsSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_max_defencemen_since_faceoff",
+            "column_moneypuck": "defendingTeamMaxTimeOnIceOfDefencemenSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_min_since_faceoff",
+            "column_moneypuck": "defendingTeamMinTimeOnIceSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_min_forwards_since_faceoff",
+            "column_moneypuck": "defendingTeamMinTimeOnIceOfForwardsSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "defend_team_time_on_ice_min_defencemen_since_faceoff",
+            "column_moneypuck": "defendingTeamMinTimeOnIceOfDefencemenSinceFaceoff",
+            "description": "Same as equivalent variable above but only counting seconds since the faceoff if the player was on the ice before the faceoff."
+        },
+        {
+            "column": "is_off_wing",
+            "column_moneypuck": "offWing",
+            "description": "Set to 1 if the shot is from the left side of the ice and the shooter is a right shot, or vice-versa. Otherwise 0."
+        },
+        {
+            "column": "distance_arena_adj",
+            "column_moneypuck": "arenaAdjustedShotDistance",
+            "description": "The shot distance adjusted for arena recording bias. Uses the same methodology as War On Ice proposed by Schuckers and Curro. blog.war-on-ice.com/"
+        },
+        {
+            "column": "x_cord_arena_adj",
+            "column_moneypuck": "arenaAdjustedXCord",
+            "description": "The x coordinate of the arena adjusted shot location. Always a positive number."
+        },
+        {
+            "column": "y_cord_arena_adj",
+            "column_moneypuck": "arenaAdjustedYCord",
+            "description": "The y coordinate of the arena adjusted shot location."
+        },
+        {
+            "column": "x_cord_arena_adj_abs",
+            "column_moneypuck": "arenaAdjustedXCordABS",
+            "description": "The absolute value of the arena adjusted x coordinate."
+        },
+        {
+            "column": "y_cord_arena_adj_abs",
+            "column_moneypuck": "arenaAdjustedYCordAbs",
+            "description": "The absolute value of the arena adjusted y coordinate."
+        },
+        {
+            "column": "time_diff_since_change",
+            "column_moneypuck": "timeDifferenceSinceChange",
+            "description": "The shooting team's minimum time on ice of any player minus the defending team's minimum time on ice of any player."
+        },
+        {
+            "column": "time_diff_since_faceoff",
+            "column_moneypuck": "averageRestDifference",
+            "description": "The shooting team's average time on ice since a faceoff minus the defending team's average time on ice since a faceoff."
+        },
+        {
+            "column": "is_home_team",
+            "column_moneypuck": "isHomeTeam",
+            "description": "Set to 1 if the shooting team is the home team."
+        },
+        {
+            "column": "is_on_goal",
+            "column_moneypuck": "shotWasOnGoal",
+            "description": "Set to 1 if the shot was on net, meaning either a goal or a goalie save."
+        },
+        {
+            "column": "player_team",
+            "column_moneypuck": "teamCode",
+            "description": "The team code of the shooting team, e. g. TOR, NYR, etc."
+        }
+    ],
+    "players_lookup": [
+        {
+            "column": "player_id",
+            "column_moneypuck": "playerId",
+            "description": "Unique ID for each player, assigned by the NHL."
+        },
+        {
+            "column": "name",
+            "column_moneypuck": "name",
+            "description": "Player's name."
+        },
+        {
+            "column": "position",
+            "column_moneypuck": "position",
+            "description": "G = goalie; D = defensman; R = right wing; C = center; L = left wing."
+        },
+        {
+            "column": "team",
+            "column_moneypuck": "team",
+            "description": "Player's team."
+        },
+        {
+            "column": "birth_date",
+            "column_moneypuck": "birthDate",
+            "description": "Player's birth date."
+        },
+        {
+            "column": "weight",
+            "column_moneypuck": "weight",
+            "description": "Player's weight."
+        },
+        {
+            "column": "height",
+            "column_moneypuck": "height",
+            "description": "Player's height."
+        },
+        {
+            "column": "nationality",
+            "column_moneypuck": "nationality",
+            "description": "Player's nationality."
+        },
+        {
+            "column": "side",
+            "column_moneypuck": "shootsCatches",
+            "description": "Player's primar side of holding a stick/catching the puck."
+        },
+        {
+            "column": "number_primary",
+            "column_moneypuck": "primaryNumber",
+            "description": "Player's primary number on a jersey."
+        },
+        {
+            "column": "position_primary",
+            "column_moneypuck": "primaryPosition",
+            "description": "Player's nationality."
+        }
+    ]
+}
