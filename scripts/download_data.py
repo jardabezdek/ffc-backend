@@ -72,7 +72,7 @@ def download_csv_file(
     return (
         pd.read_csv(source_filepath, storage_options=storage_options)
         .rename(columns=moneypuck_col_to_new_col)
-        .filter(items=moneypuck_col_to_new_col)
+        .filter(items=moneypuck_col_to_new_col.values())
         .to_csv(destination_filepath, index=False)
     )
 
