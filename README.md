@@ -46,3 +46,13 @@ The minor purpose of the data dictionary is to create a mapper between the
 [MoneyPuck.com](https://moneypuck.com/data.htm) original data columns and our own column names.
 This mapper is used for renaming and filtering the original columns during the data download,
 implemented inside the [/scripts/download_data.py](./scripts/download_data.py) script.
+
+## :link: Links
+
+- Articles
+  - [How to Get Started in Hockey Analytics](https://hockey-graphs.com/2018/11/27/how-to-get-started-in-hockey-analytics/)
+- Data sources
+  - [MoneyPuck.com](https://moneypuck.com/data.htm)
+  - [NaturalStatTrick.com](https://naturalstattrick.com/)
+- Inspiration for analysis
+  - [HockeyViz talks & articles](https://hockeyviz.com/)
