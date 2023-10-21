@@ -54,5 +54,6 @@ implemented inside the [/scripts/download_data.py](./scripts/download_data.py) s
 - Data sources
   - [MoneyPuck.com](https://moneypuck.com/data.htm)
   - [NaturalStatTrick.com](https://naturalstattrick.com/)
+  - [NHL API docs](https://gitlab.com/dword4/nhlapi)
 - Inspiration for analysis
   - [HockeyViz talks & articles](https://hockeyviz.com/)
