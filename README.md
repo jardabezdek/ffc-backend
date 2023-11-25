@@ -23,6 +23,8 @@ is used. To start it, please, follow the next steps.
 
 ## :floppy_disk: Data
 
+### :one: V1
+
 > No guarantees are made to the quality of the data. NHL data is known to have issues and biases.
 
 The whole analytics part is based on data from the [MoneyPuck.com](https://moneypuck.com/data.htm)
@@ -35,7 +37,7 @@ python /usr/src/app/scripts/download_data.py
 The [/scripts/download_data.py](./scripts/download_data.py) script creates a new `/data` folder
 in the project root directory, downloads data, and organizes the files within the folder.
 
-### :book: Data dictionary
+#### Data dictionary
 
 Data dictionary can be found in the [/data_dictionary.json](./data_dictionary.json) file.
 The dictionary is divided into two sections: players, and shots. The first section covers all the
@@ -47,6 +49,10 @@ The minor purpose of the data dictionary is to create a mapper between the
 This mapper is used for renaming and filtering the original columns during the data download,
 implemented inside the [/scripts/download_data.py](./scripts/download_data.py) script.
 
+### :two: V2
+
+TBA.
+
 ## :link: Links
 
 - Articles
@@ -55,5 +61,6 @@ implemented inside the [/scripts/download_data.py](./scripts/download_data.py) s
   - [MoneyPuck.com](https://moneypuck.com/data.htm)
   - [NaturalStatTrick.com](https://naturalstattrick.com/)
   - [NHL API docs](https://gitlab.com/dword4/nhlapi)
+  - [NHL API docs (new)](https://github.com/Zmalski/NHL-API-Reference)
 - Inspiration for analysis
   - [HockeyViz talks & articles](https://hockeyviz.com/)
