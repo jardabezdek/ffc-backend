@@ -23,35 +23,16 @@ is used. To start it, please, follow the next steps.
 
 ## :floppy_disk: Data
 
-### :one: V1
-
 > No guarantees are made to the quality of the data. NHL data is known to have issues and biases.
 
-The whole analytics part is based on data from the [MoneyPuck.com](https://moneypuck.com/data.htm)
-website. The data can be downloaded by running the following command in the docker container.
+The data from NHL API are used for the analytics platform. They can be downloaded by running
+the following commands in the docker container.
 
 ```bash
-python /usr/src/app/scripts/download_data.py
+python /usr/src/app/src/extract/teams.py
+python /usr/src/app/src/extract/players.py
+python /usr/src/app/src/extract/games.py
 ```
-
-The [/scripts/download_data.py](./scripts/download_data.py) script creates a new `/data` folder
-in the project root directory, downloads data, and organizes the files within the folder.
-
-#### Data dictionary
-
-Data dictionary can be found in the [/data_dictionary.json](./data_dictionary.json) file.
-The dictionary is divided into two sections: players, and shots. The first section covers all the
-columns related to skaters, goalies, lines, and teams. The second section describes the shots
-datasets columns.
-
-The minor purpose of the data dictionary is to create a mapper between the
-[MoneyPuck.com](https://moneypuck.com/data.htm) original data columns and our own column names.
-This mapper is used for renaming and filtering the original columns during the data download,
-implemented inside the [/scripts/download_data.py](./scripts/download_data.py) script.
-
-### :two: V2
-
-TBA.
 
 ## :link: Links
 

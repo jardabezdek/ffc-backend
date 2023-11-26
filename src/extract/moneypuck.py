@@ -1,5 +1,6 @@
 """
-Script that downloads data, and organizes the downloaded files into corresponding folders.
+Script that downloads MoneyPuck.com data, and organizes the downloaded files 
+into corresponding folders.
 """
 
 import io
@@ -12,7 +13,7 @@ import pandas as pd
 import requests
 
 DATA_SOURCE_URL = "https://moneypuck.com/moneypuck/playerData/seasonSummary"
-DATA_FOLDER = Path("/usr/src/app/data/")
+DATA_FOLDER = Path("/usr/src/app/data/v1/")
 DATA_DICT_PATH = Path("/usr/src/app/data_dictionary.json")
 
 STAT_TYPES = ("skaters", "goalies", "teams", "lines")
