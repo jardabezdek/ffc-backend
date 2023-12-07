@@ -9,7 +9,7 @@ FOLDER_DATA_GAMES = Path("/usr/src/app/data/games/")
 FOLDER_DATA_PLAYS = Path("/usr/src/app/data/plays/")
 
 FILE_TEAM_ABBREV_TO_TEAM = FOLDER_DATA_TEAMS / "team_abbrev_to_team.json"
-FILE_PLAYERS = FOLDER_DATA_PLAYERS / "plyers.csv"
+FILE_PLAYERS = FOLDER_DATA_PLAYERS / "players.csv"
 
 SEASONS = (
     "20152016",

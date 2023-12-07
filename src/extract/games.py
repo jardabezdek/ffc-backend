@@ -5,7 +5,7 @@ import json
 
 import requests
 
-from src.config import FOLDER_DATA_GAMES, SEASONS, URL_GAMECENTER
+from src.config import FOLDER_DATA_GAMES, FOLDER_DATA_PLAYS, SEASONS, URL_GAMECENTER
 from src.utils.games import (
     extract_info_from,
     get_playoff_games_ids,
@@ -41,7 +41,7 @@ def download_season_games(regular=True, playoffs=False) -> None:
 
 
 def download_game(game_id: str) -> None:
-    """Download and store a game's data as a JSON file based on the provided game ID.
+    """Download and save a game's play-by-play and game metadata as JSON files based on the game ID.
 
     Parameters:
     -----------
@@ -53,17 +53,37 @@ def download_game(game_id: str) -> None:
     None
     """
     season, season_type = extract_info_from(game_id=game_id)
-    file_path = FOLDER_DATA_GAMES / season / season_type / f"{game_id}.json"
+    file_path_game = FOLDER_DATA_GAMES / season / season_type / f"{game_id}.json"
+    file_path_plays = FOLDER_DATA_PLAYS / season / season_type / f"{game_id}.json"
 
-    if file_path.exists():
+    if file_path_game.exists() and file_path_plays.exists():
         print(f"ℹ️ Info: Game {game_id} was already downloaded!")
 
     else:
         response = requests.get(url=f"{URL_GAMECENTER}/{game_id}/play-by-play")
 
         if response.ok:
-            with open(file_path, mode="w", encoding="utf-8") as file:
-                json.dump(obj=json.loads(response.text), fp=file)
+            game = json.loads(response.text)
+
+            # if game is finished, save data
+            if game.get("gameState") == "OFF":
+                # save plays
+                with open(file_path_plays, mode="w", encoding="utf-8") as file:
+                    json.dump(
+                        obj={
+                            "gameId": game.get("id"),
+                            "season": game.get("season"),
+                            "plays": game.get("plays"),
+                        },
+                        fp=file,
+                    )
+
+                # save game
+                with open(file_path_game, mode="w", encoding="utf-8") as file:
+                    json.dump(
+                        obj={key: val for key, val in game.items() if key != "plays"},
+                        fp=file,
+                    )
 
         else:
             print(f"❌ Error: Game {game_id} was NOT loaded!")
@@ -77,6 +97,8 @@ def main() -> None:
         None
     """
     create_season_folders_in(data_folder=FOLDER_DATA_GAMES)
+    create_season_folders_in(data_folder=FOLDER_DATA_PLAYS)
+
     download_season_games(regular=True, playoffs=True)
 
     print("🎉 All games data downloaded successfully!")
