@@ -5,6 +5,7 @@ and save them into S3 bucket.
 
 import json
 import os
+from typing import Any
 
 import boto3
 import requests
@@ -17,17 +18,21 @@ URL_GAMECENTER = "https://api-web.nhle.com/v1/gamecenter"
 s3 = boto3.resource("s3")
 
 
-def handler(event: dict, context):
-    """Download and save a game's play-by-play and game metadata as JSON files based on the game ID.
+def handler(event: dict, context: Any) -> dict:
+    """Download and save a game data as JSON file based on the game ID.
 
     Parameters:
     -----------
-    game_id: str
-        A string representing the unique identifier of the game.
+    event: dict
+        A dictionary that contains data for a Lambda function to process.
+    context: Any
+        An object that provides methods and properties that provide information about
+        the invocation, function, and runtime environment.
+
 
     Returns:
     --------
-    None
+    dict
     """
     yesterday_game_ids = get_yesterday_game_ids()
 
@@ -42,38 +47,11 @@ def handler(event: dict, context):
                 print(f"ℹ️ Downloaded game data for the following game id: `{game_id}`")
                 game = json.loads(response.text)
 
-                # save plays
-                s3.Object(
-                    bucket_name=DESTINATION_BUCKET,
-                    key=f"plays/{season}/{season_type}/{game_id}.json",
-                ).put(
-                    Body=(
-                        bytes(
-                            json.dumps(
-                                {
-                                    "gameId": game.get("id"),
-                                    "season": game.get("season"),
-                                    "plays": game.get("plays"),
-                                }
-                            ).encode("UTF-8")
-                        )
-                    )
-                )
-                print(f"ℹ️ Saved plays into `{DESTINATION_BUCKET}` bucket successfully!")
-
                 # save game
                 s3.Object(
                     bucket_name=DESTINATION_BUCKET,
                     key=f"games/{season}/{season_type}/{game_id}.json",
-                ).put(
-                    Body=(
-                        bytes(
-                            json.dumps(
-                                {key: val for key, val in game.items() if key != "plays"}
-                            ).encode("UTF-8")
-                        )
-                    )
-                )
+                ).put(Body=(bytes(json.dumps(game).encode("UTF-8"))))
                 print(f"ℹ️ Saved game into `{DESTINATION_BUCKET}` bucket successfully!")
 
         return {"status_code": 200, "body": "✅ Game data downloaded successfully!"}
