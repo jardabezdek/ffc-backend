@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: base
+    meta: 
+      external_location: >
+        read_parquet(
+          "s3://frozen-facts-center-base/{name}/2023/regular/*.parquet",
+          union_by_name=True
+        )
+    tables:
+      - name: games
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
+      - name: shots
+        columns:
+          - name: id
+            tests:
+              - not_null
+          - name: game_id
+            tests:
+              - not_null
+  - name: seeds
+    tables:
+      - name: teams
+        meta:
+          external_location: read_parquet("s3://frozen-facts-center-seeds/teams.parquet")
+        columns:
+          - name: team
+            tests:
+              - not_null
+              - unique
+          - name: team_abbrev
+            tests:
+              - not_null
+              - unique

@@ -1,0 +1,33 @@
+config:
+  send_anonymous_usage_stats: False
+  use_colors: True
+
+default:
+  target: dev
+
+  outputs:
+    
+    dev:
+      type: duckdb
+      path: "{{ env_var('DBT_DUCKDB_PATH', '/usr/src/app/out.duckdb') }}"
+      extensions:
+        - s3
+        - json
+      external_root: "s3://frozen-facts-center-dev"
+      settings:
+        s3_region: eu-central-1
+        s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
+        s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
+      threads: 2
+    
+    prod:
+      type: duckdb
+      path: "{{ env_var('DBT_DUCKDB_PATH', '/tmp/tmp.duckdb') }}"
+      extensions:
+        - s3
+        - json
+      external_root: "s3://frozen-facts-center-prod"
+      use_credential_provider: aws
+      settings:
+        s3_region: eu-central-1
+      threads: 2

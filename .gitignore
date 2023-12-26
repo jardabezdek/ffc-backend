@@ -138,3 +138,12 @@ data/
 # CDK asset staging directory
 *.cdk.staging
 *cdk.out
+
+# dbt
+infra/transform/target/
+infra/transform/dbt_packages/
+infra/transform/logs/
+infra/transform/duckdb/
+
+# VS code
+.vscode/
