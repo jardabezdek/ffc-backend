@@ -38,7 +38,6 @@ def handler(event: dict, context: Any) -> dict:
         An object that provides methods and properties that provide information about
         the invocation, function, and runtime environment.
 
-
     Returns:
     --------
     dict

@@ -24,6 +24,9 @@ class Compute(Stack):
         self.lambda_download_raw_games = self.create_lambda_download_raw_games(
             storage_stack=storage_stack
         )
+        self.lambda_download_seeds_teams = self.create_lambda_download_seeds_teams(
+            storage_stack=storage_stack
+        )
         self.lambda_transform_raw_to_base = self.create_lambda_transform_raw_to_base(
             storage_stack=storage_stack
         )
@@ -72,6 +75,43 @@ class Compute(Stack):
         event_rule.add_target(aws_events_targets.LambdaFunction(handler=lambda_download_raw_games))
 
         return lambda_download_raw_games
+
+    def create_lambda_download_seeds_teams(
+        self, storage_stack: Stack
+    ) -> aws_lambda.DockerImageFunction:
+        """Create a Docker container-based AWS Lambda function to download seeds teams.
+
+        Parameters:
+        -----------
+        self : instance
+            The instance of the class.
+        storage_stack : Stack
+            The stack containing the destination bucket.
+
+        Returns:
+        --------
+        aws_lambda.DockerImageFunction
+            The Docker container-based Lambda function to download seeds teams.
+        """
+        lambda_download_seeds_teams = aws_lambda.DockerImageFunction(
+            self,
+            id="LambdaDownloadSeedsTeams",
+            function_name=get_name("download-seeds-teams"),
+            description="Download seeds teams data from NHL API.",
+            code=aws_lambda.DockerImageCode.from_image_asset(
+                (Path(__file__).resolve().parent / "lambdas" / "download-seeds-teams").as_posix()
+            ),
+            architecture=aws_lambda.Architecture.X86_64,
+            timeout=Duration.seconds(60),
+            environment={
+                "DESTINATION_BUCKET": storage_stack.bucket_seeds.bucket_name,
+            },
+        )
+
+        # grant lambda function the permissions to read/write from/to the S3 bucket
+        storage_stack.bucket_seeds.grant_read_write(identity=lambda_download_seeds_teams)
+
+        return lambda_download_seeds_teams
 
     def create_lambda_transform_raw_to_base(
         self, storage_stack: Stack
