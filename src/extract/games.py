@@ -54,9 +54,8 @@ def download_game(game_id: str) -> None:
     """
     season, season_type = extract_info_from(game_id=game_id)
     file_path_game = FOLDER_DATA_GAMES / season / season_type / f"{game_id}.json"
-    file_path_plays = FOLDER_DATA_PLAYS / season / season_type / f"{game_id}.json"
 
-    if file_path_game.exists() and file_path_plays.exists():
+    if file_path_game.exists():
         print(f"ℹ️ Info: Game {game_id} was already downloaded!")
 
     else:
@@ -67,23 +66,8 @@ def download_game(game_id: str) -> None:
 
             # if game is finished, save data
             if game.get("gameState") == "OFF":
-                # save plays
-                with open(file_path_plays, mode="w", encoding="utf-8") as file:
-                    json.dump(
-                        obj={
-                            "gameId": game.get("id"),
-                            "season": game.get("season"),
-                            "plays": game.get("plays"),
-                        },
-                        fp=file,
-                    )
-
-                # save game
                 with open(file_path_game, mode="w", encoding="utf-8") as file:
-                    json.dump(
-                        obj={key: val for key, val in game.items() if key != "plays"},
-                        fp=file,
-                    )
+                    json.dump(obj=game, fp=file)
 
         else:
             print(f"❌ Error: Game {game_id} was NOT loaded!")
