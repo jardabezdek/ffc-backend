@@ -15,7 +15,7 @@ is used. To start it, please, follow the next steps.
 
 1. Launch the docker daemon.
 1. Get to the repository root folder: `cd infra/transform/`
-1. Build the docker image with a proper tag: `docker build -t frozen-facts-center-transform:latest .`
+1. Build the docker image with a proper tag: `docker build --build-arg S3_ACCESS_KEY_ID=foo --build-arg S3_SECRET_ACCESS_KEY=foo --tag frozen-facts-center-transform:latest -f DockerfileDev .`
 1. Run docker container: `docker run -it -v $(pwd):/usr/src/app frozen-facts-center-transform:latest /bin/bash`
 
 ## dbt

@@ -26,6 +26,3 @@ ENV S3_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
 WORKDIR /usr/src/app
 
 ENV PYTHONPATH=/usr/src/app
-
-ENTRYPOINT ["/bin/bash"]
-CMD ["dbt", "run", "--select", "+fact_standings", "--target", "prod"]

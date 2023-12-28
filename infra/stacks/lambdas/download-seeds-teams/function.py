@@ -55,4 +55,4 @@ def handler(event: dict, context: Any) -> dict:
         return {"status_code": 200, "body": "✅ Teams data downloaded successfully!"}
 
     except Exception as exc:
-        return {"status_code": 500, "body": f"❌ Internal server error: {exc}."}
+        return {"status_code": 500, "body": f"❌ Internal server error: {exc}"}
