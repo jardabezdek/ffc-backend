@@ -1,3 +1,12 @@
+/*
+Official NHL standings criteria: teams are ordered by
+	- points, 
+	- then wins, 
+	- then losses (ascending), 
+	- then by games played (ascending), 
+	- and then goal differential.
+*/
+
 with games as (
 
     select * from {{ ref("stg_standings_games") }}
@@ -60,4 +69,4 @@ left join goals
 left join teams
   on games.team_id = teams.id
 
-
+order by 1 desc, 9 desc, 6 desc, 7 asc, 5 asc, 18 desc
