@@ -12,7 +12,6 @@ default:
       path: "{{ env_var('DBT_DUCKDB_PATH', '/usr/src/app/out.duckdb') }}"
       extensions:
         - s3
-        - json
       external_root: "s3://frozen-facts-center-dev"
       settings:
         s3_region: eu-central-1
@@ -24,8 +23,8 @@ default:
       type: duckdb
       path: "{{ env_var('DBT_DUCKDB_PATH', '/tmp/tmp.duckdb') }}"
       extensions:
-        - s3
-        - json
+        - httpfs
+        - parquet
       external_root: "s3://frozen-facts-center-prod"
       use_credential_provider: aws
       settings:

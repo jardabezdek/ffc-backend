@@ -4,9 +4,6 @@
 FROM phidata/duckdb:0.9.2 as python-base
 MAINTAINER Jaroslav Bezdek
 
-ARG S3_ACCESS_KEY_ID
-ARG S3_SECRET_ACCESS_KEY
-
 RUN apt-get --allow-releaseinfo-change update
 
 RUN apt-get install -y build-essential \
@@ -19,13 +16,12 @@ COPY requirements.txt .
 RUN python3 -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# load environment variables from arguments
-ENV S3_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
-ENV S3_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
-
 WORKDIR /usr/src/app
 
 ENV PYTHONPATH=/usr/src/app
 
-ENTRYPOINT ["/bin/bash"]
+COPY models/ models/
+COPY dbt_project.yml .
+COPY profiles.yml .
+
 CMD ["dbt", "run", "--select", "+fact_standings", "--target", "prod"]

@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from aws_cdk import Stack, aws_ec2, aws_ecr_assets, aws_ecs, aws_lambda
+from aws_cdk import Stack, aws_ec2, aws_ecr_assets, aws_ecs, aws_iam, aws_lambda
 from constructs import Construct
-from stacks.utils import get_env_variables, get_name
+from stacks.utils import get_name
 
 
 class Transform(Stack):
@@ -48,6 +48,18 @@ class Transform(Stack):
             memory_mib="2048",
         )
 
+        # add ECS task permissions to read/write S3 objects
+        self.ecs_task_runner.add_to_task_role_policy(
+            statement=aws_iam.PolicyStatement(
+                actions=[
+                    "ecs:StartTelemetrySession",
+                    "s3:*",
+                ],
+                effect=aws_iam.Effect.ALLOW,
+                resources=["*"],
+            )
+        )
+
         # create image
         self.ecr_image_transform = aws_ecr_assets.DockerImageAsset(
             self,
@@ -55,8 +67,6 @@ class Transform(Stack):
             asset_name=get_name("ecr-image-transform"),
             directory=(Path(__file__).resolve().parent.parent / "transform").as_posix(),
             platform=aws_ecr_assets.Platform.LINUX_AMD64,
-            build_args=get_env_variables(),
-            invalidation=aws_ecr_assets.DockerImageAssetInvalidationOptions(build_args=False),
         )
 
         # add the docker container to the task
