@@ -3,11 +3,7 @@ version: 2
 sources:
   - name: base
     meta: 
-      external_location: >
-        read_parquet(
-          "s3://frozen-facts-center-base/{name}/2023/regular/*.parquet",
-          union_by_name=True
-        )
+      external_location: read_parquet("s3://frozen-facts-center-base/{name}/2023/regular/*.parquet")
     tables:
       - name: games
         columns:

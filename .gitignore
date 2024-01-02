@@ -144,6 +144,7 @@ infra/transform/target/
 infra/transform/dbt_packages/
 infra/transform/logs/
 infra/transform/duckdb/
+infra/transform/out.duckdb
 
 # VS code
 .vscode/
