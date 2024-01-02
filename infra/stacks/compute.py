@@ -70,6 +70,7 @@ class Compute(Stack):
         event_rule = aws_events.Rule(
             self,
             id="LambdaDownloadRawGamesScheduleRule",
+            rule_name=get_name("rule-download-raw-games"),
             schedule=aws_events.Schedule.cron(**self.frequency_cron_download_raw_games),
         )
         event_rule.add_target(aws_events_targets.LambdaFunction(handler=lambda_download_raw_games))
