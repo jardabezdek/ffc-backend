@@ -1,4 +1,4 @@
-## :rocket: Frozen facts center transform layel
+## :rocket: Frozen facts center transform layer
 
 The transform layer of the data pipeline is built using dbt, and duckdb.
 

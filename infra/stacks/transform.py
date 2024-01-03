@@ -41,6 +41,7 @@ class Transform(Stack):
             id="VpcTransform",
             vpc_name=get_name("vpc-transform"),
             max_azs=2,
+            nat_gateways=0,
         )
 
     def create_ecs_cluster(self) -> aws_ecs.Cluster:
@@ -120,7 +121,11 @@ class Transform(Stack):
             schedule=aws_events.Schedule.cron(**self.frequency_cron_transform),
         )
         event_rule.add_target(
-            target=aws_events_targets.EcsTask(cluster=self.cluster, task_definition=task)
+            target=aws_events_targets.EcsTask(
+                cluster=self.cluster,
+                task_definition=task,
+                subnet_selection=aws_ec2.SubnetSelection(subnet_type=aws_ec2.SubnetType.PUBLIC),
+            )
         )
 
         return task
