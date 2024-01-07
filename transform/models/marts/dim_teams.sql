@@ -4,12 +4,6 @@ with teams as (
 
 ),
 
-current_season as (
-
-    select * from {{ ref("seed_current_season") }}
-
-),
-
 team_ids as (
 
     select distinct
@@ -17,10 +11,6 @@ team_ids as (
         home_team_abbrev as team_abbrev
 
     from {{ ref("base_games") }}
-    
-    cross join current_season
-    
-    where season = current_season_long::integer
 
 )
 
