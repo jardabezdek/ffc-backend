@@ -4,8 +4,7 @@ import itertools
 import json
 
 import requests
-
-from src.config import FOLDER_DATA_GAMES, FOLDER_DATA_PLAYS, SEASONS, URL_GAMECENTER
+from src.config import FOLDER_DATA_GAMES, SEASONS, URL_GAMECENTER
 from src.utils.games import (
     extract_info_from,
     get_playoff_games_ids,
@@ -81,7 +80,6 @@ def main() -> None:
         None
     """
     create_season_folders_in(data_folder=FOLDER_DATA_GAMES)
-    create_season_folders_in(data_folder=FOLDER_DATA_PLAYS)
 
     download_season_games(regular=True, playoffs=True)
 

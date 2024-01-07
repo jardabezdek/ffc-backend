@@ -1,8 +1,14 @@
-## :rocket: ds-nhl
+# :rocket: Frozen Facts Center
 
-NHL data analytics project providing insights on the following topics:
+Welcome to the Frozen Facts Center repository! This project serves as a comprehensive data
+analytics platform built on freely available data from the official NHL API.
 
-- players segmentation
+The repository is organized into four primary sections:
+
+1. [Cloud Infrastructure](./stacks/README.md) (details below)
+2. [Data Models for Transformation](./transform/README.md)
+3. [Web Application](./board/README.md)
+4. [Research Notebooks](./notebooks/README.md)
 
 ## :pencil: Authors
 
@@ -10,23 +16,40 @@ NHL data analytics project providing insights on the following topics:
 
 ## :construction_worker_man: Setup
 
-### :wrench: Local development
+We leverage AWS CDK to define AWS services for data storage and transformation.
 
-In order to create a working environment, the [docker](https://www.docker.com/)
-is used. To start it, please, follow the next steps.
+The project follows a standard Python project setup. Upon initialization, a virtualenv is created
+within the project, stored under the `.venv` directory. To set up the virtualenv, assuming
+a `python3` (or `python` for Windows) executable in your path with access to the `venv` package,
+follow these steps:
 
-1. Launch the docker daemon.
-1. Get to the repository root folder: `cd ~/projects/ds-nhl/`
-1. Build the docker image with a proper tag: `docker build -t ds-nhl:latest .`
-1. Run docker container: `docker run -it -p 8888:8888 -v $(pwd):/usr/src/app ds-nhl:latest /bin/bash`
-1. Run notebook inside the docker container: `jupyter notebook --ip 0.0.0.0 --no-browser --allow-root`
+1. Run `python3 -m venv .venv` in the project root directory.
+2. Activate the virtualenv: `. .venv/bin/activate`
+3. Install required dependencies: `pip install -r requirements.txt`
+4. Synthesize the CloudFormation template for AWS CDK code: `cdk synth`
+
+### :envelope: Deployment
+
+Before deployment, some useful commands include:
+
+- `cdk ls`: list all stacks in the app
+- `cdk diff`: compare deployed stack with current state
+- `cdk docs`: open CDK documentation
+
+To deploy all stacks, run `cdk deploy`. For deploying a specific stack, use the stack ID,
+such as `cdk deploy StorageStack|ComputeStack|TransformStack`.
 
 ## :floppy_disk: Data
 
-> No guarantees are made to the quality of the data. NHL data is known to have issues and biases.
+> No guarantees are made regarding the quality of the data. NHL data might contain known issues
+> and biases.
 
-The data from NHL API are used for the analytics platform. They can be downloaded by running
-the following commands in the docker container.
+Production data is downloaded and saved to AWS S3 via
+the [`download-raw-games` lambda function](./stacks/lambdas/download-raw-games/).
+Triggered daily, it fetches details about the previous night's games.
+
+For historical data, follow these steps to download to local disk within the Docker container
+defined in the [`notebooks/` folder](./notebooks/), then manually upload to AWS S3:
 
 ```bash
 python /usr/src/app/src/extract/teams.py

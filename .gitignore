@@ -133,18 +133,21 @@ dmypy.json
 *.Trash*
 
 # data files
-data/
+notebooks/data/
 
 # CDK asset staging directory
 *.cdk.staging
 *cdk.out
 
 # dbt
-infra/transform/target/
-infra/transform/dbt_packages/
-infra/transform/logs/
-infra/transform/duckdb/
-infra/transform/out.duckdb
+transform/target/
+transform/dbt_packages/
+transform/logs/
+transform/duckdb/
+transform/out.duckdb
+
+# streamlit
+board/.streamlit/secrets.toml
 
 # VS code
 .vscode/
