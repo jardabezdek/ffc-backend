@@ -2,8 +2,14 @@ version: 2
 
 sources:
   - name: base
+    config:
+      current_season: |
+        {%- if run_started_at.month >= 9 -%} {{ run_started_at.year }}
+        {%- else -%} {{ run_started_at.year - 1 }}
+        {%- endif -%}
     meta: 
-      external_location: read_parquet("s3://frozen-facts-center-base/{name}/*/regular/*.parquet")
+      external_location: >
+        read_parquet("s3://frozen-facts-center-base/{name}/{current_season}/regular/*.parquet")
     tables:
       - name: games
         columns:
@@ -33,3 +39,8 @@ sources:
             tests:
               - not_null
               - unique
+  - name: base_incremental
+    meta:
+        external_location: read_parquet("s3://frozen-facts-center-{{ target.name }}/base_{name}.parquet")
+    tables:
+      - name: games
