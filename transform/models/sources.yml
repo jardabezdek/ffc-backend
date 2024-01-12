@@ -9,7 +9,7 @@ sources:
         {%- endif -%}
     meta: 
       external_location: >
-        read_parquet("s3://frozen-facts-center-base/{name}/{current_season}/regular/*.parquet")
+        read_parquet("s3://frozen-facts-center-base/{name}/{current_season}/*/*.parquet")
     tables:
       - name: games
         columns:
@@ -17,14 +17,14 @@ sources:
             tests:
               - not_null
               - unique
-      - name: shots
-        columns:
-          - name: id
-            tests:
-              - not_null
-          - name: game_id
-            tests:
-              - not_null
+      # - name: shots
+      #   columns:
+      #     - name: id
+      #       tests:
+      #         - not_null
+      #     - name: game_id
+      #       tests:
+      #         - not_null
   - name: seeds
     tables:
       - name: teams

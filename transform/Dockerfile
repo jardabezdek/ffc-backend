@@ -24,4 +24,4 @@ COPY models/ models/
 COPY dbt_project.yml .
 COPY profiles.yml .
 
-CMD ["dbt", "run", "--select", "+fact_standings", "--target", "prod"]
+CMD ["dbt", "run", "--target", "prod"]

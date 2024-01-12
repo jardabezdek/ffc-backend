@@ -9,13 +9,13 @@ Official NHL standings criteria: teams are ordered by
 
 with games as (
 
-    select * from {{ ref("stg_standings_games") }}
+    select * from {{ ref("stg_standings_regular_games") }}
 
 ),
 
 goals as (
 
-    select * from {{ ref("stg_standings_goals") }}
+    select * from {{ ref("stg_standings_regular_goals") }}
 
 ),
 
@@ -27,6 +27,7 @@ teams as (
 
 select 
     games.season,
+	games.season_long,
     games.team_id,
 	teams.team_full_name,
 	teams.team_abbrev_name,
@@ -54,6 +55,10 @@ select
     goals.goals_for,
     goals.goals_against,
     goals.goals_diff,
+	games.wins_home || '-' || games.losses_home || '-' || games.ots_home as record_home,
+	games.wins_away || '-' || games.losses_away || '-' || games.ots_away as record_away,
+	games.wins_last_10 || '-' || games.losses_last_10 || '-' || games.ots_last_10 as record_last_10,
+	games.wins_so || '-' || games.losses_so as record_so,
 	teams.conference,
 	teams.conference_abbrev,
 	teams.division,
@@ -69,4 +74,10 @@ left join goals
 left join teams
   on games.team_id = teams.id
 
-order by 1 desc, 9 desc, 6 desc, 7 asc, 5 asc, 18 desc
+order by 
+	games.season desc, 
+	games.points desc, 
+	games.wins desc, 
+	games.losses asc, 
+	games.games_played asc, 
+	goals.goals_diff desc

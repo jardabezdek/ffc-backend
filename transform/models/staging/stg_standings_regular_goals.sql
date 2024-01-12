@@ -1,6 +1,7 @@
 with games as (
 
     select * from {{ ref("stg_games") }}
+	where season_type = 2 -- regular season
 
 ),
 
