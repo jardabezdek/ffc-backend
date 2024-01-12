@@ -11,7 +11,6 @@ from typing import Any
 
 import boto3
 import pandas as pd
-
 from utils import (
     extract_info_from,
     get_faceoff_base,
@@ -70,7 +69,7 @@ def handler(event: dict, context: Any) -> dict:
             pd.DataFrame(base).to_parquet(path=f"s3://{DESTINATION_BUCKET}/{key}", index=False)
             print(f"ℹ️ Saved `{DESTINATION_BUCKET}/{key}` successfully!")
 
-        return {"status_code": 200, "body": "✅ Raw data transformed into base successfully!"}
+        print("✅ Raw data transformed into base successfully!")
 
     except Exception as exc:
-        return {"status_code": 500, "body": f"❌ Internal server error: {exc}"}
+        print(f"❌ Internal server error: {exc}")

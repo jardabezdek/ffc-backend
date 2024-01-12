@@ -1,14 +1,15 @@
 """Util functions for lambda function."""
 
+from enum import Enum
 from pathlib import Path
 from typing import List, Tuple
 
-SEASON_TYPES = (
-    ("01", "preseason"),
-    ("02", "regular"),
-    ("03", "playoffs"),
-    ("04", "all-star"),
-)
+
+class SeasonType(Enum):
+    PRESEASON = 1
+    REGULAR = 2
+    PLAYOFF = 3
+    ALLSTAR = 4
 
 
 def extract_info_from(key: str) -> Tuple[str, str, str]:
@@ -26,8 +27,12 @@ def extract_info_from(key: str) -> Tuple[str, str, str]:
         from the provided key.
     """
     game_id = Path(key).stem
+
     season = game_id[:4]
-    season_type = dict(SEASON_TYPES).get(game_id[4:6])
+
+    season_type_val = int(game_id[5])
+    season_type = SeasonType(season_type_val).name.lower()
+
     return game_id, season, season_type
 
 

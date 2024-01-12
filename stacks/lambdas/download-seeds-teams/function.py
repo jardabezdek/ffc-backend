@@ -5,7 +5,6 @@ from typing import Any
 
 import boto3
 import pandas as pd
-
 from utils import get_current_standings
 
 DESTINATION_BUCKET = os.environ["DESTINATION_BUCKET"]
@@ -51,8 +50,7 @@ def handler(event: dict, context: Any) -> dict:
             .to_parquet(path=path, index=False)
         )
 
-        print(f"ℹ️ Saved `{path}` successfully!")
-        return {"status_code": 200, "body": "✅ Teams data downloaded successfully!"}
+        print(f"✅ Saved `{path}` successfully!")
 
     except Exception as exc:
-        return {"status_code": 500, "body": f"❌ Internal server error: {exc}"}
+        print(f"❌ Internal server error: {exc}")

@@ -2,18 +2,19 @@
 
 import datetime
 import json
+from enum import Enum
 from typing import List, Tuple
 
 import requests
 
-SEASON_TYPES = (
-    ("01", "preseason"),
-    ("02", "regular"),
-    ("03", "playoffs"),
-    ("04", "all-star"),
-)
-
 URL_SCHEDULE = "https://api-web.nhle.com/v1/schedule"
+
+
+class SeasonType(Enum):
+    PRESEASON = 1
+    REGULAR = 2
+    PLAYOFF = 3
+    ALLSTAR = 4
 
 
 def get_yesterday_date(date_format="%Y-%m-%d") -> str:
@@ -72,5 +73,8 @@ def extract_info_from(game_id: str) -> Tuple[str, str]:
         from the provided game ID.
     """
     season = game_id[:4]
-    season_type = dict(SEASON_TYPES).get(game_id[4:6])
+
+    season_type_val = int(game_id[5])
+    season_type = SeasonType(season_type_val).name.lower()
+
     return season, season_type

@@ -9,8 +9,7 @@ from typing import Any
 
 import boto3
 import requests
-
-from utils import extract_info_from, get_yesterday_game_ids
+from utils import SeasonType, extract_info_from, get_yesterday_game_ids
 
 DESTINATION_BUCKET = os.environ["DESTINATION_BUCKET"]
 URL_GAMECENTER = "https://api-web.nhle.com/v1/gamecenter"
@@ -39,6 +38,13 @@ def handler(event: dict, context: Any) -> dict:
         for game_id in yesterday_game_ids:
             season, season_type = extract_info_from(game_id=game_id)
 
+            # download only regular season and play-off games
+            if season_type not in [
+                SeasonType.REGULAR.name.lower(),
+                SeasonType.PLAYOFF.name.lower(),
+            ]:
+                continue
+
             # call NHL API
             response = requests.get(url=f"{URL_GAMECENTER}/{game_id}/play-by-play")
 
@@ -53,6 +59,6 @@ def handler(event: dict, context: Any) -> dict:
                 ).put(Body=(bytes(json.dumps(game).encode("UTF-8"))))
                 print(f"ℹ️ Saved game into `{DESTINATION_BUCKET}` bucket successfully!")
 
-        return {"status_code": 200, "body": "✅ Game data downloaded successfully!"}
+        print("✅ Game data downloaded successfully!")
 
-    return {"status_code": 500, "body": "❌ No game ids returned from NHL API."}
+    print("❌ No game ids returned from NHL API.")
