@@ -2,7 +2,6 @@ from pathlib import Path
 
 import streamlit as st
 from st_pages import show_pages_from_config
-
 from utils.style import style_page
 
 style_page(file_path=Path(__file__))
@@ -10,8 +9,8 @@ show_pages_from_config()
 
 st.write(
     """
-    Welcome to Frozen Fact Center, your ultimate destination for all things data and analytics 
-    in the thrilling world of ice hockey.
+    ##### Welcome to Frozen Facts Center, your ultimate destination for all things data \
+    and analytics in the thrilling world of ice hockey!
     
     Step onto the ice with us as we delve deep into the numbers, uncovering insights, trends, 
     and stories that go beyond the game's surface. Whether you're a die-hard fan, a seasoned 
@@ -24,6 +23,6 @@ st.write(
     visualizations that bring the numbers to life.
     
     Join us in exploring the dynamic world of hockey through a data-driven lens. Get ready 
-    to witness the game in a whole new light with Frozen Fact Center - where numbers meet the ice!
+    to witness the game in a whole new light with Frozen Facts Center - where numbers meet the ice!
     """
 )
