@@ -1,14 +1,15 @@
-# :rocket: Frozen Facts Center
+# :rocket: Frozen facts center backend
 
-Welcome to the Frozen Facts Center repository! This project serves as a comprehensive data
-analytics platform built on freely available data from the official NHL API.
+Welcome to the FFC backend repository!
 
-The repository is organized into four primary sections:
+This project serves as a comprehensive data analytics platform built on freely available data from
+the official NHL API.
+
+The repository is organized into these primary sections:
 
 1. [Cloud Infrastructure](./stacks/README.md) (details below)
 2. [Data Models for Transformation](./transform/README.md)
-3. [Web Application](./board/README.md)
-4. [Research Notebooks](./notebooks/README.md)
+3. [Research Notebooks](./notebooks/README.md)
 
 ## :pencil: Authors
 

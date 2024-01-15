@@ -1,4 +1,4 @@
-## :rocket: Frozen facts center transform layer
+## :rocket: Transform layer
 
 The transform layer of the data pipeline is constructed using dbt and duckdb.
 
@@ -11,8 +11,8 @@ is used. To start it, please, follow the next steps.
 
 1. Launch the docker daemon.
 1. Get to the repository root folder: `cd transform/`
-1. Build the docker image with a proper tag: `docker build --build-arg S3_ACCESS_KEY_ID=foo --build-arg S3_SECRET_ACCESS_KEY=foo --tag frozen-facts-center-transform:latest -f DockerfileDev .`
-1. Run docker container: `docker run -it -p 8080:8080 -v $(pwd):/usr/src/app frozen-facts-center-transform:latest /bin/bash`
+1. Build the docker image with a proper tag: `docker build --build-arg S3_ACCESS_KEY_ID=foo --build-arg S3_SECRET_ACCESS_KEY=foo --tag ffc-be-transform:latest -f DockerfileDev .`
+1. Run docker container: `docker run -it -p 8080:8080 -v $(pwd):/usr/src/app ffc-be-transform:latest /bin/bash`
 1. Run dbt transformation inside the docker container. For example: `dbt run --select +fact_standings --target prod`
 1. To view the documentation, generate it using `dbt docs generate && dbt docs serve` Then, navigate
 to [http://localhost:8080](http://localhost:8080) to access the documentation.
