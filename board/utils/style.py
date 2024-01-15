@@ -18,7 +18,7 @@ STANDDINGS_DF_COLUMN_CONFIG = {
     ),
     "team_full_name": st.column_config.TextColumn(
         label=" ",
-        # width="medium",
+        width="medium",
     ),
     "games_played": st.column_config.NumberColumn(
         label="GP",
