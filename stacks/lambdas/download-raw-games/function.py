@@ -17,7 +17,7 @@ URL_GAMECENTER = "https://api-web.nhle.com/v1/gamecenter"
 s3 = boto3.resource("s3")
 
 
-def handler(event: dict, context: Any) -> dict:
+def handler(event: dict, context: Any) -> None:
     """Download and save a game data as JSON file based on the game ID.
 
     Parameters:
@@ -30,35 +30,36 @@ def handler(event: dict, context: Any) -> dict:
 
     Returns:
     --------
-    dict
+    None
     """
     yesterday_game_ids = get_yesterday_game_ids()
 
-    if yesterday_game_ids:
-        for game_id in yesterday_game_ids:
-            season, season_type = extract_info_from(game_id=game_id)
+    if not yesterday_game_ids:
+        print("❌ No game ids returned from NHL API.")
+        return
 
-            # download only regular season and play-off games
-            if season_type not in [
-                SeasonType.REGULAR.name.lower(),
-                SeasonType.PLAYOFF.name.lower(),
-            ]:
-                continue
+    for game_id in yesterday_game_ids:
+        season, season_type = extract_info_from(game_id=game_id)
 
-            # call NHL API
-            response = requests.get(url=f"{URL_GAMECENTER}/{game_id}/play-by-play")
+        # download only regular season and play-off games
+        if season_type not in [
+            SeasonType.REGULAR.name.lower(),
+            SeasonType.PLAYOFF.name.lower(),
+        ]:
+            continue
 
-            if response.ok:
-                print(f"ℹ️ Downloaded game data for the following game id: `{game_id}`")
-                game = json.loads(response.text)
+        # call NHL API
+        response = requests.get(url=f"{URL_GAMECENTER}/{game_id}/play-by-play")
 
-                # save game
-                s3.Object(
-                    bucket_name=DESTINATION_BUCKET,
-                    key=f"games/{season}/{season_type}/{game_id}.json",
-                ).put(Body=(bytes(json.dumps(game).encode("UTF-8"))))
-                print(f"ℹ️ Saved game into `{DESTINATION_BUCKET}` bucket successfully!")
+        if response.ok:
+            print(f"ℹ️ Downloaded game data for the following game id: `{game_id}`")
+            game = json.loads(response.text)
 
-        print("✅ Game data downloaded successfully!")
+            # save game
+            s3.Object(
+                bucket_name=DESTINATION_BUCKET,
+                key=f"games/{season}/{season_type}/{game_id}.json",
+            ).put(Body=(bytes(json.dumps(game).encode("UTF-8"))))
+            print(f"ℹ️ Saved game into `{DESTINATION_BUCKET}` bucket successfully!")
 
-    print("❌ No game ids returned from NHL API.")
+    print("✅ Game data downloaded successfully!")

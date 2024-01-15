@@ -26,7 +26,7 @@ DESTINATION_BUCKET = os.environ["DESTINATION_BUCKET"]
 s3 = boto3.resource("s3")
 
 
-def handler(event: dict, context: Any) -> dict:
+def handler(event: dict, context: Any) -> None:
     """Read JSON file with raw game data, extract base info, and save data into PARQUET files.
 
     Parameters:
@@ -39,7 +39,7 @@ def handler(event: dict, context: Any) -> dict:
 
     Returns:
     --------
-    dict
+    None
     """
     try:
         input_file_bucket = event.get("Records")[0].get("s3").get("bucket").get("name")
