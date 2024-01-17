@@ -73,6 +73,7 @@ select
 	sum(case when points = 2 and period_type = 'REG' then 1 else 0 end)::int as wins_reg,
 	sum(case when points = 2 and period_type = 'OT' then 1 else 0 end)::int as wins_ot,
 	sum(case when points = 2 and period_type = 'SO' then 1 else 0 end)::int as wins_so,
+	sum(case when points = 2 and period_type in ('REG', 'OT') then 1 else 0 end)::int as wins_reg_ot,
 	sum(case when points = 0 and period_type = 'REG' then 1 else 0 end)::int as losses_reg,
 	sum(case when points = 1 and period_type = 'OT' then 1 else 0 end)::int as losses_ot,
 	sum(case when points = 1 and period_type = 'SO' then 1 else 0 end)::int as losses_so,

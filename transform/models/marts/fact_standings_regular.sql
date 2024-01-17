@@ -1,10 +1,15 @@
 /*
-Official NHL standings criteria: teams are ordered by
-	- points, 
-	- then wins, 
-	- then losses (ascending), 
-	- then by games played (ascending), 
-	- and then goal differential.
+Official NHL standings criteria: https://www.nhl.com/standings/
+
+The standing of the clubs is determined in the following order:
+	- points (descending),
+	- games played (ascending),
+	- games won, excluding games won in Overtime or by Shootout (descending),
+	- games won, excluding games won by Shootout (descending),
+	- games won in any manner (descending),
+	- points earned in games against each other (descending), -- skipped in this implementation (!)
+	- differential between goals for and against (descending),
+	- goals scored (descending).
 */
 
 with games as (
@@ -40,6 +45,7 @@ select
 	games.wins_reg,
 	games.wins_ot,
 	games.wins_so,
+	games.wins_reg_ot,
 	games.losses_reg,
 	games.losses_ot,
 	games.losses_so,
@@ -77,7 +83,9 @@ left join teams
 order by 
 	games.season desc, 
 	games.points desc, 
-	games.wins desc, 
-	games.losses asc, 
 	games.games_played asc, 
-	goals.goals_diff desc
+	games.wins_reg desc,
+	games.wins_reg_ot desc,
+	games.wins desc, 
+	goals.goals_diff desc,
+	goals.goals_for desc
