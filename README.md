@@ -17,7 +17,9 @@ The repository is organized into these primary sections:
 
 ## :construction_worker_man: Setup
 
-We leverage AWS CDK to define AWS services for data storage and transformation.
+The AWS CDK is leveraged to define AWS services for data storage and transformation.
+
+### :wrench: Local development
 
 The project follows a standard Python project setup. Upon initialization, a virtualenv is created
 within the project, stored under the `.venv` directory. To set up the virtualenv, assuming
