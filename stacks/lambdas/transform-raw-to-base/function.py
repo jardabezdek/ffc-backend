@@ -17,6 +17,7 @@ from utils import (
     get_game_base,
     get_hit_base,
     get_penalty_base,
+    get_player_base,
     get_possession_change_base,
     get_shot_base,
 )
@@ -62,6 +63,7 @@ def handler(event: dict, context: Any) -> None:
             ("hits", get_hit_base),
             ("possession-changes", get_possession_change_base),
             ("penalties", get_penalty_base),
+            ("players", get_player_base),
         ):
             base = fn(game=game)
             key = f"{folder_name}/{season}/{season_type}/{game_id}.parquet"

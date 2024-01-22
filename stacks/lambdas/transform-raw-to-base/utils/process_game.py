@@ -252,3 +252,30 @@ def get_penalty_base(game: dict) -> List[dict]:
         for event in game.get("plays")
         if event.get("typeDescKey") in ("penalty")
     ]
+
+
+def get_player_base(game: dict) -> List[dict]:
+    """Extract players from a game dictionary.
+
+    Parameters:
+    -----------
+    game : dict
+        A dictionary containing game information.
+
+    Returns:
+    --------
+    List[dict]
+    """
+    return [
+        {
+            "player_id": player.get("playerId"),
+            "team_id": player.get("teamId"),
+            "season": game.get("season"),
+            "first_name": player.get("firstName", {}).get("default"),
+            "last_name": player.get("lastName", {}).get("default"),
+            "sweater_number": player.get("sweaterNumber"),
+            "position_code": player.get("positionCode"),
+            "headshot": player.get("headshot"),
+        }
+        for player in game.get("rosterSpots")
+    ]
