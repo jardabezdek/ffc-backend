@@ -25,6 +25,9 @@ sources:
       #     - name: game_id
       #       tests:
       #         - not_null
+      - name: schedule
+        meta:
+          external_location: read_parquet("s3://frozen-facts-center-base/schedule/schedule.parquet")
   - name: seeds
     tables:
       - name: teams
