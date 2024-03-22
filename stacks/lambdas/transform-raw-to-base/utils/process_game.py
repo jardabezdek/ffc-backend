@@ -56,7 +56,7 @@ def get_game_base(game: dict) -> List[dict]:
             "date": game.get("gameDate"),
             "start_time_utc": game.get("startTimeUTC"),
             "venue": game.get("venue", {}).get("default"),
-            "period": game.get("period"),
+            "period": game.get("periodDescriptor", {}).get("number"),
             "period_type": game.get("periodDescriptor", {}).get("periodType"),
             "away_team_id": game.get("awayTeam", {}).get("id"),
             "away_team_abbrev": game.get("awayTeam", {}).get("abbrev"),
@@ -106,7 +106,7 @@ def get_general_event_features(event: dict) -> dict:
     """
     return {
         "id": event.get("eventId"),
-        "period": event.get("period"),
+        "period": event.get("periodDescriptor", {}).get("number"),
         "period_type": event.get("periodDescriptor", {}).get("periodType"),
         "time_in_period": event.get("timeInPeriod"),
         "time_remaining": event.get("timeRemaining"),
