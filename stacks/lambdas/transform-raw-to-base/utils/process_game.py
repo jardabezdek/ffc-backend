@@ -268,6 +268,7 @@ def get_player_base(game: dict) -> List[dict]:
     """
     return [
         {
+            **get_general_game_features(game=game),
             "player_id": player.get("playerId"),
             "team_id": player.get("teamId"),
             "season": game.get("season"),
