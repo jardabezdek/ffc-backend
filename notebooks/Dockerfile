@@ -32,3 +32,5 @@ RUN usermod --home /tmp nobody
 USER nobody
 
 ENV PYTHONPATH=/usr/src/app
+
+CMD ["jupyter", "notebook", "--ip", "0.0.0.0", "--no-browser", "--allow-root"]
