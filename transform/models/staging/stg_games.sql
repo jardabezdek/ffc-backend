@@ -9,7 +9,7 @@ select
     date,
     home_team_id,
     away_team_id,
-    substring(season, 1, 4)::int as season,
+    substring(season::char, 1, 4)::int as season,
     type as season_type,
     home_team_score,
     away_team_score,

@@ -55,9 +55,9 @@ select
 	season,
 	season || '/' || season + 1 as season_long,
 	-- season_type,
-	substring(id, 8, 1)::int as playoff_round,
-	substring(id, 9, 1)::int as matchup,
-	substring(id, 10, 1)::int as match,
+	substring(id::char, 8, 1)::int as playoff_round,
+	substring(id::char, 9, 1)::int as matchup,
+	substring(id::char, 10, 1)::int as match,
 	strftime(date::date, '%d.%m.') as day_month,
 	home_team_id,
 	away_team_id,
@@ -70,11 +70,11 @@ select
 from playoff_games
 
 left join team_match_points as home_match_points
-  on home_match_points.matchup_id = substring(id, 1, 9)
- and home_match_points.match_idx = substring(id, 10, 1)
+  on home_match_points.matchup_id = substring(id::char, 1, 9)
+ and home_match_points.match_idx = substring(id::char, 10, 1)
  and home_match_points.team_id = playoff_games.home_team_id
  
 left join team_match_points as away_match_points
-  on away_match_points.matchup_id = substring(id, 1, 9)
- and away_match_points.match_idx = substring(id, 10, 1)
+  on away_match_points.matchup_id = substring(id::char, 1, 9)
+ and away_match_points.match_idx = substring(id::char, 10, 1)
  and away_match_points.team_id = playoff_games.away_team_id

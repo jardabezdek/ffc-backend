@@ -17,14 +17,22 @@ sources:
             tests:
               - not_null
               - unique
-      # - name: shots
-      #   columns:
-      #     - name: id
-      #       tests:
-      #         - not_null
-      #     - name: game_id
-      #       tests:
-      #         - not_null
+      - name: shots
+        columns:
+          - name: id
+            tests:
+              - not_null
+          - name: game_id
+            tests:
+              - not_null
+      - name: players
+        columns:
+          - name: player_id
+            tests:
+              - not_null
+          - name: game_id
+            tests:
+              - not_null
       - name: schedule
         meta:
           external_location: read_parquet("s3://frozen-facts-center-base/schedule/schedule.parquet")
@@ -47,3 +55,5 @@ sources:
         external_location: read_parquet("s3://frozen-facts-center-{{ target.name }}/base_{name}.parquet")
     tables:
       - name: games
+      - name: shots
+      - name: players
