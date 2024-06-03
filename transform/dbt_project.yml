@@ -28,3 +28,7 @@ clean-targets:
 models:
   frozen_facts_center:
     materialized: external
+
+flags:
+  send_anonymous_usage_stats: False
+  use_colors: True
