@@ -67,7 +67,7 @@ select
 
 	-- points
 	sum(points)::int as points,
-	round(sum(points) / (count(team_id) * 2), 3) as points_pct,
+	round(sum(points) / (count(team_id) * 2) * 100, 1) as points_pct,
 
 	-- record by period type
 	sum(case when points = 2 and period_type = 'REG' then 1 else 0 end)::int as wins_reg,
