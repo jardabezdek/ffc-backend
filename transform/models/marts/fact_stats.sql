@@ -10,9 +10,9 @@ teams as (
 
 ),
 
-goals as (
+skaters as (
 
-    select * from {{ ref("stg_stats_skaters_goals") }}
+    select * from {{ ref("stg_stats_skaters") }}
 
 ),
 
@@ -50,13 +50,21 @@ select
     toi.toi,
 
     -- skaters
-    ifnull(goals.points, 0) as points,
-    ifnull(goals.goals, 0) as goals,
-    ifnull(goals.empty_net_goals, 0) as empty_net_goals,
-    ifnull(goals.individual_goals, 0) as individual_goals,
-    ifnull(goals.assists, 0) as assists,
-    ifnull(goals.assists_1, 0) as assists_1,
-    ifnull(goals.assists_2, 0) as assists_2,
+    ifnull(skaters.points, 0) as points,
+    ifnull(skaters.goals, 0) as goals,
+    ifnull(skaters.assists, 0) as assists,
+    ifnull(skaters.even_strength_points, 0) as even_strength_points,
+    ifnull(skaters.even_strength_goals, 0) as even_strength_goals,
+    ifnull(skaters.power_play_points, 0) as power_play_points,
+    ifnull(skaters.power_play_goals, 0) as power_play_goals,
+    ifnull(skaters.shorthanded_points, 0) as shorthanded_points,
+    ifnull(skaters.shorthanded_goals, 0) as shorthanded_goals,
+    ifnull(skaters.ot_goals, 0) as ot_goals,
+    ifnull(skaters.game_winning_goals, 0) as game_winning_goals,
+    ifnull(skaters.shots, 0) as shots,
+    ifnull(skaters.shoot_pct, 0) as shoot_pct,
+    ifnull(skaters.plus_minus, 0) as plus_minus,
+    ifnull(skaters.pim, 0) as pim,
 
     -- goalies
     goalies.shots_against,
@@ -70,10 +78,10 @@ from players
 left join teams
   on players.team_id = teams.id
 
-left join goals
-  on goals.player_id = players.player_id
- and goals.season = players.season
- and goals.season_type = players.season_type
+left join skaters
+  on skaters.player_id = players.player_id
+ and skaters.season = players.season
+ and skaters.season_type = players.season_type
 
 left join goalies
   on goalies.player_id = players.player_id
@@ -90,5 +98,5 @@ where toi_seconds > 0
 order by
     players.season desc,
     players.season_type desc,
-    goals.points desc,
+    skaters.points desc,
     players.games_played asc
