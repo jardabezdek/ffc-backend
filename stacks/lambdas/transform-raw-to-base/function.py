@@ -68,8 +68,9 @@ def handler(event: dict, context: Any) -> None:
             base = fn(game=game)
             key = f"{folder_name}/{season}/{season_type}/{game_id}.parquet"
 
-            pd.DataFrame(base).to_parquet(path=f"s3://{DESTINATION_BUCKET}/{key}", index=False)
-            print(f"ℹ️ Saved `{DESTINATION_BUCKET}/{key}` successfully!")
+            if base:
+                pd.DataFrame(base).to_parquet(path=f"s3://{DESTINATION_BUCKET}/{key}", index=False)
+                print(f"ℹ️ Saved `{DESTINATION_BUCKET}/{key}` successfully!")
 
         print("✅ Raw data transformed into base successfully!")
 
