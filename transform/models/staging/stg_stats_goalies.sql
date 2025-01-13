@@ -6,8 +6,9 @@ with shots as (
         game_id,
         goalie_in_net_id as player_id,
         event_type,
+        xg,
 
-    from {{ ref("base_shots") }}
+    from {{ ref("stg_shots") }}
 	
     where event_type in ('goal', 'shot-on-goal') 
       and goalie_in_net_id is not null
@@ -35,6 +36,9 @@ goals_against as (
         player_id,
         count(*) as shots_against,
         sum(case when event_type = 'goal' then 1 else 0 end) as goals_against,
+        sum(xg) as xg_against,
+        sum(xg) / count(*) as xg_against_per_shot,
+        xg_against - goals_against as saved_goals_above_expected,
 	
     from shots
 	
@@ -42,25 +46,6 @@ goals_against as (
         season,
         season_type,
         player_id,
-
-),
-
-goals_against_per_game as (
-
-    select 
-        season,
-        season_type,
-        player_id,
-        game_id,
-        sum(case when event_type = 'goal' then 1 else 0 end) as goals_against
-		
-    from shots
-	
-    group by
-        season,
-        season_type,
-        player_id,
-        game_id
 
 ),
 
@@ -87,8 +72,13 @@ select
     goals_against.player_id,
     shots_against,
     goals_against,
+    round(xg_against, 2) as xg_against,
+    round(xg_against_per_shot, 2) as xg_against_per_shot,
+    round(saved_goals_above_expected, 2) as saved_goals_above_expected,
     round((shots_against - goals_against) / shots_against * 100, 1) as save_pct,
     round(goals_against * 60 * 60 / toi_seconds, 2) as gaa,
+    round(xg_against * 60 * 60 / toi_seconds, 2) as xgaa,
+    round(saved_goals_above_expected * 60 * 60 / toi_seconds, 2) as saved_goals_above_expected_per_60,
     ifnull(shutouts, 0)::int as shutouts,
 
 from goals_against

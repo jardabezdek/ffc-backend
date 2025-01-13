@@ -69,8 +69,13 @@ select
     -- goalies
     goalies.shots_against,
     goalies.goals_against,
-    goalies.gaa,
     goalies.save_pct,
+    goalies.xg_against,
+    goalies.xg_against_per_shot,
+    goalies.saved_goals_above_expected,
+    goalies.saved_goals_above_expected_per_60,
+    goalies.gaa,
+    goalies.xgaa,
     ifnull(goalies.shutouts, 0) as shutouts,
 	
 from players
