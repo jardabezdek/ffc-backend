@@ -30,6 +30,38 @@ COLS_TO_KEEP = [
 ]
 
 
+def model(dbt, session):
+    # configure the model
+    dbt.config(materialized="external")
+
+    # get shots data
+    df = dbt.ref("base_shots").df()
+
+    # add new columns
+    df["x_coord_norm"] = get_normalized_coordinate(df=df, coord_type="x")
+    df["y_coord_norm"] = get_normalized_coordinate(df=df, coord_type="y")
+    df["coords_combination"] = get_combination(df=df, cols=["x_coord_norm", "y_coord_norm"])
+
+    # filter the data
+    df = df.loc[
+        # filter out blocked shots
+        (df.event_type != "blocked-shot")
+        # filter out shots from team own half of the rink
+        & (df.x_coord_norm >= 0)
+    ]
+
+    # get xG model
+    xg_model = get_xg_model(df=df)
+
+    # add xG model to the data
+    df["xg"] = df["coords_combination"].map(xg_model)
+
+    # filter out columns that are not needed
+    df = df.loc[:, COLS_TO_KEEP]
+
+    return df
+
+
 def get_normalized_coordinate(df: pd.DataFrame, coord_type: str) -> pd.Series:
     def normalize_coordinate(row: dict, coord_type: str) -> int:
         home_team_defending_side = row["home_team_defending_side"]
@@ -71,35 +103,3 @@ def get_xg_model(df: pd.DataFrame, min_shots_cnt: int = 10) -> dict:
         # save coordinates to xG value mapping
         .xg.to_dict()
     )
-
-
-def model(dbt, session):
-    # configure the model
-    dbt.config(materialized="external")
-
-    # get shots data
-    df = dbt.ref("base_shots").df()
-
-    # add new columns
-    df["x_coord_norm"] = get_normalized_coordinate(df=df, coord_type="x")
-    df["y_coord_norm"] = get_normalized_coordinate(df=df, coord_type="y")
-    df["coords_combination"] = get_combination(df=df, cols=["x_coord_norm", "y_coord_norm"])
-
-    # filter the data
-    df = df.loc[
-        # filter out blocked shots
-        (df.event_type != "blocked-shot")
-        # filter out shots from team own half of the rink
-        & (df.x_coord_norm >= 0)
-    ]
-
-    # get xG model
-    xg_model = get_xg_model(df=df)
-
-    # add xG model to the data
-    df["xg"] = df["coords_combination"].map(xg_model)
-
-    # filter out columns that are not needed
-    df = df.loc[:, COLS_TO_KEEP]
-
-    return df

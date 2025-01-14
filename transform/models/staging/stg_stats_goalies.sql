@@ -10,7 +10,7 @@ with shots as (
 
     from {{ ref("stg_shots") }}
 	
-    where event_type in ('goal', 'shot-on-goal') 
+    where event_type in ('goal', 'shot-on-goal', 'missed-shot')
       and goalie_in_net_id is not null
 
 ),
