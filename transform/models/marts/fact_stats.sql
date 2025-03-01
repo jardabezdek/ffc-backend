@@ -67,8 +67,8 @@ select
     ifnull(skaters.pim, 0) as pim,
 
     -- goalies
-    goalies.shots_against,
-    goalies.goals_against,
+    ifnull(goalies.shots_against, 0) as shots_against,
+    ifnull(goalies.goals_against, 0) as goals_against,
     goalies.save_pct,
     goalies.xg_against,
     goalies.xg_against_per_shot,
