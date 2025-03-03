@@ -2,6 +2,8 @@ import pandas as pd
 
 COLS_TO_KEEP = [
     "game_id",
+    "season",
+    "season_type",
     "id",
     "away_team_id",
     "home_team_id",
@@ -27,6 +29,8 @@ COLS_TO_KEEP = [
     "blocking_player_id",
     "missed_shot_reason",
     "xg",
+    "is_fenwick",
+    "is_from_own_half",
 ]
 
 
@@ -38,23 +42,18 @@ def model(dbt, session):
     df = dbt.ref("base_shots").df()
 
     # add new columns
+    df["season"] = df.game_id.astype(str).str[:4].astype(int)
+    df["season_type"] = df.game_id.astype(str).str[5].astype(int)
     df["x_coord_norm"] = get_normalized_coordinate(df=df, coord_type="x")
     df["y_coord_norm"] = get_normalized_coordinate(df=df, coord_type="y")
     df["coords_combination"] = get_combination(df=df, cols=["x_coord_norm", "y_coord_norm"])
+    df["is_fenwick"] = df.event_type != "blocked-shot"
+    df["is_from_own_half"] = df.x_coord_norm >= 0
 
-    # filter the data
-    df = df.loc[
-        # filter out blocked shots
-        (df.event_type != "blocked-shot")
-        # filter out shots from team own half of the rink
-        & (df.x_coord_norm >= 0)
-    ]
-
-    # get xG model
+    # add xG column
     xg_model = get_xg_model(df=df)
-
-    # add xG model to the data
-    df["xg"] = df["coords_combination"].map(xg_model)
+    xg_filter = (df.is_fenwick) & (df.is_from_own_half)
+    df.loc[xg_filter, "xg"] = df.loc[xg_filter, "coords_combination"].map(xg_model)
 
     # filter out columns that are not needed
     df = df.loc[:, COLS_TO_KEEP]
@@ -88,8 +87,8 @@ def get_xg_model(df: pd.DataFrame, min_shots_cnt: int = 10) -> dict:
     """Get xG model."""
     return (
         df
-        # filter out shots from team own half of the rink
-        .loc[df.x_coord_norm >= 0]
+        # apply filters
+        .loc[(df.is_fenwick) & (df.is_from_own_half)]
         # group by coordinates combination
         .groupby(by=["coords_combination"])
         # compute shots, goals and xG values

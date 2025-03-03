@@ -64,6 +64,10 @@ select
     ifnull(skaters.shots, 0) as shots,
     ifnull(skaters.shoot_pct, 0) as shoot_pct,
     ifnull(skaters.plus_minus, 0) as plus_minus,
+    ifnull(skaters.xg, 0) as xg,
+    ifnull(skaters.xg_per_shot, 0) as xg_per_shot,
+    ifnull(skaters.xg_per_game, 0) as xg_per_game,
+    ifnull(skaters.goals_above_expected, 0) as goals_above_expected,
     ifnull(skaters.pim, 0) as pim,
 
     -- goalies

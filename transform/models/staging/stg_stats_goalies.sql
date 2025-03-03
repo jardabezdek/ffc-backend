@@ -1,8 +1,8 @@
 with shots as (
 
     select 
-        substring(game_id::varchar, 1, 4)::int as season,
-        substring(game_id::varchar, 6, 1)::int as season_type,
+        season,
+        season_type,
         game_id,
         goalie_in_net_id as player_id,
         event_type,
@@ -10,7 +10,7 @@ with shots as (
 
     from {{ ref("stg_shots") }}
 	
-    where event_type in ('goal', 'shot-on-goal', 'missed-shot')
+    where is_fenwick
       and goalie_in_net_id is not null
 
 ),
