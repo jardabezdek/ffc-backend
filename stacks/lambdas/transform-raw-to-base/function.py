@@ -1,6 +1,6 @@
 """
 Lambda function that
-- reads JSON file with raw game data, 
+- reads JSON file with raw game data,
 - extracts base info about game, and events,
 - saves base data into PARQUET files.
 """
@@ -20,6 +20,7 @@ from utils import (
     get_player_base,
     get_possession_change_base,
     get_shot_base,
+    get_situation_time_base,
 )
 
 DESTINATION_BUCKET = os.environ["DESTINATION_BUCKET"]
@@ -48,10 +49,7 @@ def handler(event: dict, context: Any) -> None:
         game_id, season, season_type = extract_info_from(key=input_file_key)
 
         game = json.loads(
-            s3.Object(bucket_name=input_file_bucket, key=input_file_key)
-            .get()["Body"]
-            .read()
-            .decode("utf-8")
+            s3.Object(bucket_name=input_file_bucket, key=input_file_key).get()["Body"].read().decode("utf-8")
         )
         print(f"ℹ️ Loaded game data from `{input_file_bucket}/{input_file_key}`")
 
@@ -64,6 +62,7 @@ def handler(event: dict, context: Any) -> None:
             ("possession-changes", get_possession_change_base),
             ("penalties", get_penalty_base),
             ("players", get_player_base),
+            ("situation-time", get_situation_time_base),
         ):
             base = fn(game=game)
             key = f"{folder_name}/{season}/{season_type}/{game_id}.parquet"
