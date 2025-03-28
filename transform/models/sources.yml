@@ -38,6 +38,11 @@ sources:
           - name: game_id
             tests:
               - not_null
+      - name: situation-time
+        columns:
+          - name: game_id
+            tests:
+              - not_null
       - name: schedule
         meta:
           external_location: read_parquet("s3://frozen-facts-center-base/schedule/schedule.parquet")
@@ -63,3 +68,4 @@ sources:
       - name: shots
       - name: players
       - name: penalties
+      - name: situation_time
