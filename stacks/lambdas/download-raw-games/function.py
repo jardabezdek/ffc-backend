@@ -1,5 +1,5 @@
 """
-Lambda function to download a game's play-by-play and game metadata as JSON files, 
+Lambda function to download a game's play-by-play and game metadata as JSON files,
 and save them into S3 bucket.
 """
 
