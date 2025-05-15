@@ -18,9 +18,9 @@ utah as (
 	
     select
         59 as id,
-        'Utah Hockey Club' as team_full_name,
+        'Utah Mammoth' as team_full_name,
         'UTA' as team_abbrev_name,
-        'Utah' as team_common_name,
+        'Mammoth' as team_common_name,
         'Western' as conference,
         'W' as conference_abbrev,
         'Central' as division,
