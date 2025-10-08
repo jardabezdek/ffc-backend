@@ -14,10 +14,25 @@ team_ids as (
 
 ),
 
-utah as (
+utah_hc as (
 	
     select
         59 as id,
+        'Utah Hockey Club' as team_full_name,
+        'UTA' as team_abbrev_name,
+        'Utah' as team_common_name,
+        'Western' as conference,
+        'W' as conference_abbrev,
+        'Central' as division,
+        'C' as division_abbrev,
+        'https://assets.nhle.com/logos/nhl/svg/UTA_20242025-20242025_light.svg' as team_logo_url
+
+),
+
+utah_mammoth as (
+	
+    select
+        68 as id,
         'Utah Mammoth' as team_full_name,
         'UTA' as team_abbrev_name,
         'Mammoth' as team_common_name,
@@ -40,4 +55,6 @@ left join team_ids
 
 -- order by 1
 
-union select * from utah
+union select * from utah_hc
+
+union select * from utah_mammoth
