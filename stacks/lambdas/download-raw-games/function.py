@@ -13,12 +13,13 @@ from utils import SeasonType, extract_info_from, get_yesterday_game_ids
 
 DESTINATION_BUCKET = os.environ["DESTINATION_BUCKET"]
 URL_GAMECENTER = "https://api-web.nhle.com/v1/gamecenter"
+URL_SHIFTCHART = "https://api.nhle.com/stats/rest/en/shiftcharts?cayenneExp=gameId="
 
 s3 = boto3.resource("s3")
 
 
 def handler(event: dict, context: Any) -> None:
-    """Download and save a game data as JSON file based on the game ID.
+    """Download and save a game data and shift chart as JSON files based on the game ID.
 
     Parameters:
     -----------
@@ -48,18 +49,28 @@ def handler(event: dict, context: Any) -> None:
         ]:
             continue
 
-        # call NHL API
-        response = requests.get(url=f"{URL_GAMECENTER}/{game_id}/play-by-play")
+        # call NHL API endpoints
+        for url, data_type, s3_key in [
+            (
+                f"{URL_GAMECENTER}/{game_id}/play-by-play",
+                "game data",
+                f"games/{season}/{season_type}/{game_id}.json",
+            ),
+            (
+                f"{URL_SHIFTCHART}{game_id}",
+                "shift chart",
+                f"shift-charts/{season}/{season_type}/{game_id}.json",
+            ),
+        ]:
+            response = requests.get(url=url)
 
-        if response.ok:
-            print(f"ℹ️ Downloaded game data for the following game id: `{game_id}`")
-            game = json.loads(response.text)
+            if response.ok:
+                print(f"ℹ️ Downloaded {data_type} for the following game id: `{game_id}`")
+                data = json.loads(response.text)
 
-            # save game
-            s3.Object(
-                bucket_name=DESTINATION_BUCKET,
-                key=f"games/{season}/{season_type}/{game_id}.json",
-            ).put(Body=(bytes(json.dumps(game).encode("UTF-8"))))
-            print(f"ℹ️ Saved game into `{DESTINATION_BUCKET}` bucket successfully!")
+                s3.Object(bucket_name=DESTINATION_BUCKET, key=s3_key).put(
+                    Body=(bytes(json.dumps(data).encode("UTF-8")))
+                )
+                print(f"ℹ️ Saved {data_type} into `{DESTINATION_BUCKET}` bucket successfully!")
 
-    print("✅ Game data downloaded successfully!")
+    print("✅ Game data and shift chart downloaded successfully!")
