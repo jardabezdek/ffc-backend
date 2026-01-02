@@ -67,7 +67,10 @@ def get_game_log_features(player_id: int, game_id: int, season: str, season_type
     game_log = {}
 
     if response.ok:
-        game_log = next((item for item in response.json().get("gameLog", {}) if item["gameId"] == game_id), {})
+        game_log = next(
+            (item for item in response.json().get("gameLog", {}) if item["gameId"] == game_id),
+            {},
+        )
 
     return {
         "goals": game_log.get("goals"),

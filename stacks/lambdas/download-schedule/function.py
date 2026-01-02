@@ -1,6 +1,5 @@
 """
-Lambda function to download a games schedule for the next 7 days, and save it into S3 bucket
-as a PARQUET file.
+Lambda function to download a games schedule for the next 7 days, and save it into S3 bucket as a PARQUET file.
 """
 
 import json

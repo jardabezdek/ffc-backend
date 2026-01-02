@@ -59,7 +59,10 @@ def get_situation_time_base(game: dict) -> List[dict]:
             ),
             "situation_time": time,
         }
-        for team_id, team_type in [(home_team_id, TeamType.HOME), (away_team_id, TeamType.AWAY)]
+        for team_id, team_type in [
+            (home_team_id, TeamType.HOME),
+            (away_team_id, TeamType.AWAY),
+        ]
         for situation_code, time in situation_code_to_time.items()
     ]
 

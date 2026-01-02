@@ -23,22 +23,12 @@ class Compute(Stack):
     def __init__(self, scope: Construct, construct_id: str, storage_stack: Stack, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        self.lambda_download_raw_games = self.create_lambda_download_raw_games(
-            storage_stack=storage_stack
-        )
-        self.lambda_download_seeds_teams = self.create_lambda_download_seeds_teams(
-            storage_stack=storage_stack
-        )
-        self.lambda_download_schedule = self.create_lambda_download_schedule(
-            storage_stack=storage_stack
-        )
-        self.lambda_transform_raw_to_base = self.create_lambda_transform_raw_to_base(
-            storage_stack=storage_stack
-        )
+        self.lambda_download_raw_games = self.create_lambda_download_raw_games(storage_stack=storage_stack)
+        self.lambda_download_seeds_teams = self.create_lambda_download_seeds_teams(storage_stack=storage_stack)
+        self.lambda_download_schedule = self.create_lambda_download_schedule(storage_stack=storage_stack)
+        self.lambda_transform_raw_to_base = self.create_lambda_transform_raw_to_base(storage_stack=storage_stack)
 
-    def create_lambda_download_raw_games(
-        self, storage_stack: Stack
-    ) -> aws_lambda.DockerImageFunction:
+    def create_lambda_download_raw_games(self, storage_stack: Stack) -> aws_lambda.DockerImageFunction:
         """Create a Docker container-based AWS Lambda function to download raw games.
 
         Parameters:
@@ -82,9 +72,7 @@ class Compute(Stack):
 
         return lambda_download_raw_games
 
-    def create_lambda_download_seeds_teams(
-        self, storage_stack: Stack
-    ) -> aws_lambda.DockerImageFunction:
+    def create_lambda_download_seeds_teams(self, storage_stack: Stack) -> aws_lambda.DockerImageFunction:
         """Create a Docker container-based AWS Lambda function to download seeds teams.
 
         Parameters:
@@ -119,9 +107,7 @@ class Compute(Stack):
 
         return lambda_download_seeds_teams
 
-    def create_lambda_download_schedule(
-        self, storage_stack: Stack
-    ) -> aws_lambda.DockerImageFunction:
+    def create_lambda_download_schedule(self, storage_stack: Stack) -> aws_lambda.DockerImageFunction:
         """Create a Docker container-based AWS Lambda function to download games schedule.
 
         Parameters:
@@ -165,9 +151,7 @@ class Compute(Stack):
 
         return lambda_download_schedule
 
-    def create_lambda_transform_raw_to_base(
-        self, storage_stack: Stack
-    ) -> aws_lambda.DockerImageFunction:
+    def create_lambda_transform_raw_to_base(self, storage_stack: Stack) -> aws_lambda.DockerImageFunction:
         """Create a Docker container-based AWS Lambda function to transform raw data into base data.
 
         Parameters:

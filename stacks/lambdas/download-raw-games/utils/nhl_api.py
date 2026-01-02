@@ -51,9 +51,7 @@ def get_yesterday_game_ids() -> List[str]:
         for game_day in schedule.get("gameWeek"):
             if game_day.get("date") == yesterday_date_str:
                 return [
-                    str(game.get("id"))
-                    for game in game_day.get("games")
-                    if game.get("gameState") in ["OFF", "FINAL"]
+                    str(game.get("id")) for game in game_day.get("games") if game.get("gameState") in ["OFF", "FINAL"]
                 ]
     return []
 
