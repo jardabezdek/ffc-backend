@@ -196,5 +196,10 @@ class Compute(Stack):
             aws_s3_notifications.LambdaDestination(fn=lambda_transform_raw_to_base),
             aws_s3.NotificationKeyFilter(prefix="games/", suffix=".json"),
         )
+        bucket_raw.add_event_notification(
+            aws_s3.EventType.OBJECT_CREATED_PUT,
+            aws_s3_notifications.LambdaDestination(fn=lambda_transform_raw_to_base),
+            aws_s3.NotificationKeyFilter(prefix="shift-charts/", suffix=".json"),
+        )
 
         return lambda_transform_raw_to_base

@@ -1,13 +1,14 @@
 from enum import Enum
 from pathlib import Path
-from typing import Tuple
 
+from pydantic import BaseModel
 from utils.faceoff import get_faceoff_base
 from utils.game import get_game_base
 from utils.hit import get_hit_base
 from utils.penalty import get_penalty_base
 from utils.player import get_player_base
 from utils.possession_change import get_possession_change_base
+from utils.shift import get_shift_base
 from utils.shot import get_shot_base
 from utils.situation_time import get_situation_time_base
 
@@ -19,7 +20,13 @@ class SeasonType(Enum):
     ALLSTAR = 4
 
 
-def extract_info_from(key: str) -> Tuple[str, str, str]:
+class GameInfo(BaseModel):
+    game_id: str
+    season: str
+    season_type: str
+
+
+def extract_info_from(key: str) -> GameInfo:
     """Extract game_id, season, and season type from a key.
 
     Parameters:
@@ -29,8 +36,8 @@ def extract_info_from(key: str) -> Tuple[str, str, str]:
 
     Returns:
     --------
-    Tuple[str, str, str]
-        A tuple containing information about the game_id, season, and season type extracted
+    GameInfo
+        A GameInfo object containing information about the game_id, season, and season type extracted
         from the provided key.
     """
     game_id = Path(key).stem
@@ -40,7 +47,11 @@ def extract_info_from(key: str) -> Tuple[str, str, str]:
     season_type_val = int(game_id[5])
     season_type = SeasonType(season_type_val).name.lower()
 
-    return game_id, season, season_type
+    return GameInfo(
+        game_id=game_id,
+        season=season,
+        season_type=season_type,
+    )
 
 
 __all__ = [
@@ -53,4 +64,5 @@ __all__ = [
     "get_possession_change_base",
     "get_shot_base",
     "get_situation_time_base",
+    "get_shift_base",
 ]
