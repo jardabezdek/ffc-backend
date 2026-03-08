@@ -33,3 +33,6 @@ select
     toi_minutes || ':' || lpad((toi_seconds % 60)::char, 2, '0') as toi,
 
 from toi
+
+
+-- TODO: add stg_shifts and stg_game_situations to the query to compute total time on ice by game situation
