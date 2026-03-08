@@ -134,6 +134,8 @@ dmypy.json
 
 # data files
 notebooks/data/
+notebooks/playground/data/
+notebooks/playground/charts/
 
 # CDK asset staging directory
 *.cdk.staging
